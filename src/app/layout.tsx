@@ -4,7 +4,7 @@ import "./globals.css";
 import { config as dotenv } from 'dotenv-safe';
 dotenv();
 
-const APP_URL = process.env.URL || "http://localhost:3000";
+const APP_URL = process.env.APP_URL || "http://localhost:3000";
 
 export const metadata: Metadata = {
     metadataBase: new URL(APP_URL),

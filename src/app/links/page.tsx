@@ -31,6 +31,21 @@ const LinksPage = () => {
             link: "/",
             title: "Visite meu website :)",
         },
+        {
+            image: "/r-logo.svg",
+            link: "/",
+            title: "Visite meu website :)",
+        },
+        {
+            image: "/r-logo.svg",
+            link: "/",
+            title: "Visite meu website :)",
+        },
+        {
+            image: "/r-logo.svg",
+            link: "/",
+            title: "Visite meu website :)",
+        },
     ]
 
     return (
