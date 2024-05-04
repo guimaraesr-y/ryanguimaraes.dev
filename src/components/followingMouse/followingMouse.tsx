@@ -14,8 +14,8 @@ const FollowingMouse: React.FC<CircleProps> = ({ radius = 25, color = 'blue' }) 
 
     const handleMouseMove = (event: MouseEvent) => {
         setMoved(true);
-        setX(event.clientX - radius);
-        setY(event.clientY - radius);
+        setX(event.pageX - radius);
+        setY(event.pageY - radius);
     };
 
     useEffect(() => {
