@@ -2,7 +2,6 @@ import RestError from "@/errors/restError";
 import { NextRequest, NextResponse } from "next/server"
 import RequestData from "./requestData";
 
-
 /**
  * Middleware function that handles a request by executing a series of handlers.
  */

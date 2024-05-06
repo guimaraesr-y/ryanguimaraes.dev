@@ -30,7 +30,6 @@ const Navbar = ({ fixNav }: {
             const openedPx = `-${linkMenu.current?.offsetHeight}px`;
             const closedPx = '101%';
             const state = nav.current.getAttribute('data-open') == 'true';
-            console.log(fixNav, state)
 
             if(!state) {
                 if(!fixNav) nav.current.style.backgroundColor = '#1c1c1c'
@@ -56,63 +55,6 @@ const Navbar = ({ fixNav }: {
         }
         
     }, [fixNav, nav])
-
-    // useGSAP(() => {
-    //     const tl = gsap.timeline({
-    //         paused: true,
-            
-    //     });
-
-    //     tl.to(linkMenu.current, {
-    //         duration: 0.5,
-    //         bottom: `-${linkMenu.current?.offsetHeight}px` || '100%',
-    //         ease: 'power3.out',
-    //     })
-        
-    //     tl
-    //         .to('.bar1', {
-    //             rotate: 45,
-    //             y: 11,
-    //             duration: 0.25,
-    //             ease: 'power3.out',
-    //         }, '<')
-    //         .to('.bar2', {
-    //             visibility: 'hidden',
-    //             duration: 0.25,
-    //             ease: 'power3.out',
-    //         }, '<')
-    //         .to('.bar3', {
-    //             rotate: -45,
-    //             y: -11,
-    //             duration: 0.25,
-    //             ease: 'power3.out',
-    //         }, '<')
-
-    //     let linkMenuToggled = false;
-
-    //     const openMenu = () => {
-    //         if(!linkMenuToggled) {
-    //             linkMenuToggled = true;
-
-    //             if(nav.current && !fixNav) nav.current.style.backgroundColor = '#1c1c1c';
-
-    //             tl.play();
-    //             console.log('abriu')
-    //         } else {
-    //             linkMenuToggled = false;
-    //             console.log('fechou')
-    //             tl.reverse().eventCallback('onReverseComplete', () => {
-    //                 if(nav.current && !fixNav) nav.current.style.backgroundColor = 'transparent';
-    //             })
-    //         }
-    //     }
-
-    //     toggleButton.current?.addEventListener('click', openMenu);
-
-    //     return () => {
-    //         toggleButton.current?.removeEventListener('click', openMenu);
-    //     }
-    // }, [fixNav, linkMenu, toggleButton, nav])
 
     return (
         <nav ref={nav} className={`navbar absolute top-0 left-0 right-0 flex items-center justify-between text-[1em] transition-all duration-600 px-[5%] py-[1.6%] z-20 ${kanit.className}`}>

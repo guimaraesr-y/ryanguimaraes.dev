@@ -14,7 +14,6 @@ dotenvConfig();
 const MAX_REQUESTS = process.env.NODE_ENV === 'production' ? 5 : 10;
 const PERIOD = process.env.NODE_ENV === 'production' ? 1000 * 60 * 60 * 12 : 1000;
 
-
 // POST to /api/contact
 const contactPost = async (req: NextRequest, requestData: RequestData) => {
     let body;
@@ -39,5 +38,5 @@ const contactPost = async (req: NextRequest, requestData: RequestData) => {
 export const POST = requestHandler(
     clientIpMiddleware, 
     throttlingMiddleware(MAX_REQUESTS, PERIOD), 
-    contactPost
+    contactPost,
 );

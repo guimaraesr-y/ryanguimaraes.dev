@@ -3,13 +3,14 @@ import { createClient } from 'redis';
 import { config as dotenv } from "dotenv-safe";
 dotenv();
 
+const REDIS_URL = process.env.REDIS_URL;
+
 const getRedisClient = async () => {
     let client;
 
-    console.log(process.env.NODE_ENV)
     if(process.env.NODE_ENV === 'production') {
         client = createClient({
-            url: process.env.REDIS_URL!,
+            url: REDIS_URL,
         });
     } else {
         client = createClient();
