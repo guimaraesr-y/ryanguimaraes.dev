@@ -1,5 +1,5 @@
 {
-  "name": "site-next",
+  "name": "ryanguimaraes-dev",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -14,11 +14,12 @@
     "dotenv-safe": "^9.1.0",
     "gsap": "^3.12.5",
     "mongoose": "^8.3.2",
-    "next": "14.1.0",
+    "next": "^14.2.13",
     "nodemailer": "^6.9.13",
     "react": "^18",
     "react-dom": "^18",
-    "redis": "^4.6.13"
+    "redis": "^4.6.13",
+    "ryanguimaraes-dev": "file:"
   },
   "devDependencies": {
     "@types/node": "^20",
