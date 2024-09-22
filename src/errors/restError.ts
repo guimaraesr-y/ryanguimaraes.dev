@@ -1,4 +1,6 @@
-class RestError extends Error {
+import AppError from "./appError";
+
+class RestError extends AppError {
     
     statusCode: number;
 

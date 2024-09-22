@@ -1,3 +1,5 @@
+'use client';
+
 import { useGSAP } from "@gsap/react"
 import gsap, { random } from "gsap"
 import TextPlugin from "gsap/TextPlugin"
@@ -46,10 +48,6 @@ const TypeWrite = ({ texts, className }: {
             </h1>
         </div>
     )
-}
-
-const box = {
-
 }
 
 export default TypeWrite

@@ -4,8 +4,10 @@ import { FormEvent, FormEventHandler, useRef, useState } from "react";
 import LoadingWheel from '@/components/loadingWheel/loadingWheel';
 import FloatInput from "./floatInput";
 import Button from "../button/button";
+import { useContact } from "@/hooks/useContact";
+import { CreateContactInterface } from "@/lib/contact/interfaces";
 
-interface inputsType {
+interface FormInputsInterface {
     firstName: string;
     lastName: string;
     email: string;
@@ -17,38 +19,43 @@ interface inputsType {
 const ContactForm = () => {
     const form = useRef<HTMLFormElement>(null);
 
-    const [inputs, setInputs] = useState<inputsType>();
-    const [contactMessageSent, setContactMessageSent] = useState<Boolean | null>(null);
-    const [contactErrorMessage, setContactErrorMessage] = useState<String>('');
-    const [formLoading, setFormLoading] = useState<Boolean>(false);
+    const [inputs, setInputs] = useState<CreateContactInterface>();
+    const [contactMessageSent, setContactMessageSent] = useState<Boolean>(false);
+    
+    const { 
+        createContact, 
+        loading,
+        error 
+    } = useContact();
+
 
     const handleFormSubmit: FormEventHandler = (event: FormEvent) => {
         event.preventDefault();
-        setFormLoading(true);
+        setContactMessageSent(false);
 
-        fetch('/api/contact', {
-            method: 'POST',
-            body: JSON.stringify(inputs),
-            headers: {
-                'content-type':'application/json'
-            }
-        })
-            .then(async(data) => {
-                if(!data.ok) return Promise.reject(await data.json());
-            })
+        createContact(inputs!)
             .then(data => {
-                setFormLoading(false);
-                setContactMessageSent(true);
+                setContactMessageSent(true);  
             })
             .catch(err => {
                 console.error(err);
-                setFormLoading(false);
-                setContactErrorMessage(err.message ? err.message : 'Tente novamente mais tarde.');
                 setContactMessageSent(false);
             })
             .finally(() => {
+                clearForm();
                 if(form.current) form.current.scrollIntoView();
             })
+    }
+
+    const clearForm = () => {
+        setInputs({
+            firstName: '',
+            lastName: '',
+            email: '',
+            phone: '',
+            subject: '',
+            message: '',
+        })
     }
 
     const handleType = (event: FormEvent) => {
@@ -67,21 +74,21 @@ const ContactForm = () => {
         <form ref={form} className='p-[10vw] md:p-[5vw] text-white md:w-3/4 lg:w-1/2 m-auto md:border-2 md:border-solid md:border-white md:rounded-2xl' onSubmit={handleFormSubmit}>
             <h1 className='font-bold mb-5 text-center text-[6vw] md:text-[3vw]'>Deixe-me uma mensagem!</h1>
 
-            {
-                contactMessageSent === true
-                    ? <div id='successMessage' className='border border-solid border-green-300 text-green-300 rounded-lg flex align-items-center p-3 mb-8'>
+            {contactMessageSent && (
+                    <div id='successMessage' className='border border-solid border-green-300 text-green-300 rounded-lg flex align-items-center p-3 mb-8'>
                         <div>
                             Obrigado! Sua mensagem foi enviada, assim que possível entrarei em contato.
                         </div>
                     </div>
-                    : contactMessageSent === false
-                        ? <div id='failureMessage' className='border border-solid border-red-300 text-red-300 rounded-lg flex align-items-center p-3 mb-8'>
-                            <div>
-                                Ocorreu um erro ao enviar sua mensagem: { contactErrorMessage }
-                            </div>
+                )}
+
+            {error && (
+                    <div id='failureMessage' className='border border-solid border-red-300 text-red-300 rounded-lg flex align-items-center p-3 mb-8'>
+                        <div>
+                            Ocorreu um erro ao enviar sua mensagem: { error }
                         </div>
-                        : ''
-            }
+                    </div>
+                )}
 
             <div className="mb-5 flex justify-between gap-10">
                 <div className='w-full'>
@@ -168,7 +175,7 @@ const ContactForm = () => {
 
             <div className='flex align-items-center mt-3 gap-5'>
                 <Button type="submit">Enviar Mensagem</Button>
-                {formLoading ? <LoadingWheel size={20} /> : ''}
+                {loading && <LoadingWheel size={20} />}
             </div>
         </form>
     )

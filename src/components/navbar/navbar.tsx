@@ -1,80 +1,68 @@
-import React, { useEffect, useRef, useState } from "react";
-import './navbar.css';
+'use client';
 
-import { Kanit } from "next/font/google";
+import React, { useState } from "react";
 import Image from "next/image";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
 
-const kanit = Kanit({ weight: "400", subsets: ["latin"] })
+const Navbar = () => {
+    const [isOpen, setIsOpen] = useState(false);
 
-const Navbar = ({ fixNav }: {
-    fixNav: boolean
-}) => {
-    const nav = useRef<HTMLElement>(null);
-    const toggleButton = useRef<HTMLDivElement>(null);
-    const linkMenu = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        if(fixNav && nav.current) {
-            nav.current.style.position = "fixed";
-            nav.current.style.backgroundColor = '#1c1c1c'
-        } else if(nav.current) {
-            nav.current.style.position = "absolute";
-            nav.current.style.backgroundColor = 'transparent'
-        }
-
-        const toggleButtonHandler = () => {
-            if(!nav.current || !linkMenu.current) return;
-            
-            const openedPx = `-${linkMenu.current?.offsetHeight}px`;
-            const closedPx = '101%';
-            const state = nav.current.getAttribute('data-open') == 'true';
-
-            if(!state) {
-                if(!fixNav) nav.current.style.backgroundColor = '#1c1c1c'
-                nav.current.setAttribute('data-open', 'true');
-            } else {
-                if(!fixNav) nav.current.style.backgroundColor = 'transparent'
-                nav.current.setAttribute('data-open', 'false')
-            }
-
-            
-            if(linkMenu.current?.style.bottom == openedPx) {
-                linkMenu.current!.style.bottom = closedPx;
-            } else {
-                linkMenu.current!.style.bottom = openedPx;
-            }
-        }
-
-        const toggleButtonCurrent = toggleButton.current;
-        toggleButtonCurrent?.addEventListener('click', toggleButtonHandler)
-
-        return () => {
-            toggleButtonCurrent?.removeEventListener('click', toggleButtonHandler)
-        }
-        
-    }, [fixNav, nav])
+    const toggleMenu = () => {
+        setIsOpen(!isOpen);
+    };
 
     return (
-        <nav ref={nav} className={`navbar absolute top-0 left-0 right-0 flex items-center justify-between text-[1em] transition-all duration-600 px-[5%] py-[1.6%] z-20 ${kanit.className}`}>
-            <a href="#home" className="flex flex-column items-center w-1/2 md:w-1/6 z-20">
-                <Image src="/imgs/logo-1x-compressed.gif" width={0} height={0} className="w-full max-w-[200px]" alt="Logo" priority={true} />
-            </a>
-            <div ref={toggleButton} className="inline-block md:hidden cursor-pointer z-20">
-                <div className="bar1 w-[35px] h-[5px] bg-white rounded-[5px] my-[6px] transition-all duration-400"></div>
-                <div className="bar2 w-[35px] h-[5px] bg-white rounded-[5px] my-[6px] transition-all duration-400"></div>
-                <div className="bar3 w-[35px] h-[5px] bg-white rounded-[5px] my-[6px] transition-all duration-400"></div>
-            </div>
-            <div ref={linkMenu} className="linkMenu absolute left-0 right-0 bottom-[101%] bg-[#1c1c1c] md:bg-transparent shadow-2xl md:relative flex flex-col md:flex-row gap-[30px] p-[10%] md:p-0 z-10 transition-all duration-400">
-                <a href="#sobre">SOBRE</a>
-                <a href="#skills">SKILLS</a>
-                {/* <a href="#">BLOG</a> */}
-                {/* <Link to="/askmeanything">A.M.A</Link> */}
-                <a href="#contato">CONTATO</a>
-            </div>
-        </nav>
-    )
-}
+        <nav className={`bg-slate-800/50 w-full fixed top-0 left-0 z-30 shadow-md backdrop-blur-lg transition duration-300`} >
+            <div className="md:max-w-7xl mx-auto px-8">
+                <div className="flex items-center justify-between h-16">
+                    {/* Logo */}
+                    <div className="flex-shrink-0">
+                        <a href="#home">
+                            <Image src="/imgs/logo-1x-compressed.gif" width={150} height={50} alt="Logo" priority={true} />
+                        </a>
+                    </div>
 
-export default Navbar
+                    {/* Menu for Desktop */}
+                    <div className="hidden md:flex items-center space-x-8 color-gray-400">
+                        <a href="#sobre" className="hover:text-slate-500 font-semibold transition-colors duration-300">
+                            SOBRE
+                        </a>
+                        <a href="#skills" className="hover:text-slate-500 font-semibold transition-colors duration-300">
+                            SKILLS
+                        </a>
+                        <a href="#contato" className="hover:text-slate-500 font-semibold transition-colors duration-300">
+                            CONTATO
+                        </a>
+                    </div>
+
+                    {/* Mobile menu button */}
+                    <div className="flex md:hidden">
+                        <button onClick={toggleMenu} className="text-gray-300 hover:text-slate-600 focus:outline-none">
+                            <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={!isOpen ? "M4 6h16M4 12h16M4 18h16" : "M6 18L18 6M6 6l12 12"}></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            {/* Mobile menu */}
+            {isOpen && (
+                <div className="md:hidden shadow-md">
+                    <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 text-gray-400">
+                        <a href="#sobre" className="block hover:bg-gray-100 px-3 py-2 rounded-md text-base font-semibold">
+                            SOBRE
+                        </a>
+                        <a href="#skills" className="block hover:bg-gray-100 px-3 py-2 rounded-md text-base font-semibold">
+                            SKILLS
+                        </a>
+                        <a href="#contato" className="block hover:bg-gray-100 px-3 py-2 rounded-md text-base font-semibold">
+                            CONTATO
+                        </a>
+                    </div>
+                </div>
+            )}
+        </nav>
+    );
+};
+
+export default Navbar;
