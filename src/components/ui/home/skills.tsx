@@ -18,7 +18,7 @@ const skills = [
 
 export default function SkillSection() {
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-black px-6 py-16">
+    <section id="skills" className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-black px-6 py-16">
       <h1 className="text-4xl md:text-6xl font-bold text-white mb-8 text-center">
         Habilidades
       </h1>
