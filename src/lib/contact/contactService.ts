@@ -29,12 +29,12 @@ class ContactService {
         data.ipAddress = userIp;
         data.createdAt = Date.now();
 
-        return new Promise((resolve, reject) => {
+        return new Promise(async (resolve, reject) => {
             const contact = new Contact(data);
 
-            contact.save()
-                .then(() => resolve(contact.toJSON()))
-                .catch((err: Error) => reject(err))
+            const saved = await contact.save()
+
+            console.log('saved:', saved);
 
             const contactObject: ContactInterface = contact.toObject();
             this.emailHandler.emailUserConfirmation(contactObject);
