@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 import { Lexend } from "next/font/google";
+import Navbar from "@/components/navbar/navbar";
 
 const APP_URL = process.env.APP_URL || "http://localhost:3000";
 
@@ -21,6 +22,7 @@ export default function RootLayout({
     return (
         <html lang="pt-br">
             <body className={lexend.className}>
+                <Navbar />
                 {children}
             </body>
         </html>
