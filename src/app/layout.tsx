@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-import { config as dotenv } from 'dotenv-safe';
 import { Lexend } from "next/font/google";
-dotenv();
 
 const APP_URL = process.env.APP_URL || "http://localhost:3000";
 
