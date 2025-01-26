@@ -1,9 +1,6 @@
 import { InternalServerError } from "@/errors/internalServerError";
 import ContactInterface from "../contact/interfaces";
 
-import { config as dotenv } from "dotenv-safe";
-dotenv();
-
 class TelegramLogger {
     private ENDPOINT: string;
     private CHAT_ID: string | number;

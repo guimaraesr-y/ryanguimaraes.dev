@@ -2,9 +2,6 @@ import ContactInterface from "../contact/interfaces";
 import nodemailer, { Transporter } from "nodemailer"
 import Mail from "nodemailer/lib/mailer";
 
-import { config as dotenv } from "dotenv-safe";
-dotenv();
-
 class EmailHandler {
     private transporter: Transporter;
 
