@@ -70,6 +70,31 @@ class EmailHandler {
 
         this.sendEmail(email);
     }
+
+    public warnAdmin = (contact: ContactInterface) => {
+        const email = {
+            from: `"Ryan Guimarães" <${ process.env.GMAIL_EMAIL }>`,
+            to: process.env.GMAIL_EMAIL,
+            subject: `Novo contato: ${ contact.subject }`,
+            html: `
+                <div style="max-width:650px;margin:auto">
+                    <style>* { margin: 0; }</style>
+                    <div style="background-color:#1b2735;text-align:center;padding: 2%;">
+                        <img src="https://ryanguimaraes.dev/imgs/logo-1x-compressed.gif" style="width:75%;max-width: 200px;" alt="Ryan Guimarães">
+                    </div>
+                    <div style="padding:4%;">
+                        <h1 style="padding-bottom:10px">Novo contato: ${ contact.subject }</h1>
+                        <p>Nome: ${ contact.firstName } ${ contact.lastName }</p>
+                        <p>Email: ${ contact.email }</p>
+                        <p>Mensagem: ${ contact.message }</p>
+                    </div>
+                </div>
+            `
+        }
+
+        this.sendEmail(email);
+    }
+    
 }
 
 export default EmailHandler;
