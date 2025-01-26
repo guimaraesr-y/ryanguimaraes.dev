@@ -1,12 +1,12 @@
 import React from 'react';
-import HomeHero from '@/components/homeHero/HomeHero';
-import StarsParallax from '@/components/starsParallax/starsParallax';
-
 import Image from 'next/image';
-import SocialLinks from '@/components/socialLinks/socialLinks';
-import ContactForm from '@/components/contactForm/contactForm';
 import { Kanit } from 'next/font/google';
+
+import ContactForm from '@/components/ui/home/contactForm';
 import SkillSection from '@/components/ui/home/skills';
+import HomeHero from '@/components/ui/home/HomeHero';
+import SocialLinks from '@/components/ui/home/socialLinks';
+import StarsParallax from '@/components/starsParallax/starsParallax';
 
 const nameFont = Kanit({ weight: '400', subsets: ['latin'] });
 
