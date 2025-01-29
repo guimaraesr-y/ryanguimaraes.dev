@@ -1,35 +1,20 @@
 import React from 'react';
-import HomeHero from '@/components/homeHero/HomeHero';
-import Navbar from '@/components/navbar/navbar';
-import StarsParallax from '@/components/starsParallax/starsParallax';
-
 import Image from 'next/image';
-import SocialLinks from '@/components/socialLinks/socialLinks';
-import Card from '@/components/card/card';
-import ContactForm from '@/components/contactForm/contactForm';
 import { Kanit } from 'next/font/google';
+
+import ContactForm from '@/components/ui/home/contactForm';
+import SkillSection from '@/components/ui/home/skills';
+import HomeHero from '@/components/ui/home/HomeHero';
+import SocialLinks from '@/components/ui/home/socialLinks';
+import StarsParallax from '@/components/starsParallax/starsParallax';
 
 const nameFont = Kanit({ weight: '400', subsets: ['latin'] });
 
 const Home = () => {
 
-    const tecnologiasData = [
-        { src: '/imgs/technologies/python.svg', name: 'Python' },
-        { src: '/imgs/technologies/nodejs.svg', name: 'Node' },
-        { src: '/imgs/technologies/php.svg', name: 'PHP' },
-        { src: '/imgs/technologies/java.svg', name: 'Java' },
-        { src: '/imgs/technologies/mysql.svg', name: 'SQL' },
-        { src: '/imgs/technologies/react.svg', name: 'React' },
-        { src: '/imgs/technologies/spring.svg', name: 'Spring' },
-        { src: '/imgs/technologies/next-js.svg', name: 'Next.JS' },
-    ]
-
     return (
         <>
-            <Navbar />
-            <div>
-                <HomeHero />
-            </div>
+            <HomeHero />
             
             <section id='sobre' className='bg-[#353535] px-[8%] pt-[7%] md:pt-[3%] pb-[12%] md:pb-[6%]'>
                 <div className='flex flex-col items-center text-justify'>
@@ -58,13 +43,7 @@ const Home = () => {
                 </div>
             </section>
 
-            <section id='skills' className='px-[8%] py-[12%] md:py-[6%] bg-[url(/imgs/bg-waves.jpg)] bg-cover bg-center'>
-                <div className='skills-panel animate__animated animate__fadeIn animate__delay-1s'>
-                    <div className='grid grid-cols-2 md:grid-cols-4 gap-2 md:max-w-[70vw] m-auto py-5'>
-                        { tecnologiasData.map(skill => ( <Card key={skill.name} img={skill.src} text={skill.name} /> )) }
-                    </div>
-                </div>
-            </section>
+            <SkillSection></SkillSection>
 
             <section id='contato'>
                 <StarsParallax />

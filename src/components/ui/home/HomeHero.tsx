@@ -1,6 +1,6 @@
 'use client';
 
-import TypeWrite from "../typeWrite/TypeWrite";
+import TypeWrite from "../../typeWrite/TypeWrite";
 import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
