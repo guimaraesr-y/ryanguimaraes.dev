@@ -5,7 +5,7 @@ import LoadingWheel from '@/components/loadingWheel/loadingWheel';
 import FloatInput from "../../floatInput/floatInput";
 import Button from "../../button/button";
 import { useContact } from "@/hooks/useContact";
-import { CreateContactInterface } from "@/lib/contact/interfaces";
+import { CreateContactInterface } from "@/domain/contact/interfaces";
 
 interface FormInputsInterface {
     firstName: string;

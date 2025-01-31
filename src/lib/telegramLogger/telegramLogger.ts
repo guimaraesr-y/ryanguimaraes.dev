@@ -1,5 +1,5 @@
 import { InternalServerError } from "@/errors/internalServerError";
-import ContactInterface from "../contact/interfaces";
+import ContactInterface from "../../domain/contact/interfaces";
 
 class TelegramLogger {
     private ENDPOINT: string;

@@ -1,4 +1,4 @@
-import ContactInterface from "../contact/interfaces";
+import ContactInterface from "../../domain/contact/interfaces";
 import nodemailer, { Transporter } from "nodemailer"
 import Mail from "nodemailer/lib/mailer";
 

@@ -1,7 +1,7 @@
 'use server';
 
-import ContactService from "@/lib/contact/contactService";
-import { CreateContactInterface } from "@/lib/contact/interfaces";
+import ContactService from "@/domain/contact/service";
+import { CreateContactInterface } from "@/domain/contact/interfaces";
 
 const contactService = new ContactService();
 

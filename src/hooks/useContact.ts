@@ -1,5 +1,5 @@
 import AppError from "@/errors/appError";
-import { CreateContactInterface } from "@/lib/contact/interfaces";
+import { CreateContactInterface } from "@/domain/contact/interfaces";
 import { useState } from "react";
 import * as contactAction from "@/actions/contactAction";
 
