@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Play, Square } from 'lucide-react';
 
 const TransitionSection = () => {
@@ -28,13 +28,10 @@ const TransitionSection = () => {
         currentLog = 0;
 
         const logInterval = setInterval(() => {
-
             if (currentLog >= serverLogs.length) {
                 clearInterval(logInterval);
                 setIsIntervalRunning(false);
-
-                // Show app after logs complete
-                setTimeout(() => setShowApp(true), 500); 
+                setTimeout(() => setShowApp(true), 500);
                 return;
             }
 
@@ -50,11 +47,13 @@ const TransitionSection = () => {
     };
 
     return (
-        <div className="relative h-[45vh] bg-noise bg-gradient-to-r from-gray-900 to-black py-20">
-            <div className="max-w-4xl mx-auto h-full flex gap-8">
+        <div className="relative h-auto md:h-[45vh] bg-noise bg-gradient-to-r from-gray-900 to-black py-8 md:py-20">
+            <div className="max-w-4xl mx-auto min-h-[400px] md:h-full flex flex-col md:flex-row gap-4 md:gap-8 px-4 md:px-0">
                 {/* Terminal */}
                 <div
-                    className={`bg-black bg-opacity-50 rounded-lg p-6 transition-all duration-500 ease-in-out ${isServerRunning ? 'w-1/2' : 'w-full'}`}
+                    className={`bg-black bg-opacity-50 rounded-lg p-4 md:p-6 transition-all duration-500 ease-in-out flex-1 md:flex-none ${
+                        isServerRunning ? 'md:w-1/2' : 'w-full'
+                    }`}
                 >
                     <div className="flex items-center gap-2 mb-4">
                         <div className="w-3 h-3 rounded-full bg-red-500"></div>
@@ -87,8 +86,11 @@ const TransitionSection = () => {
 
                 {/* Server Preview */}
                 <div
-                    className={`bg-white rounded-lg overflow-hidden transition-all duration-500 ease-in-out ${isServerRunning ? 'w-1/2 opacity-100 translate-x-0' : 'w-0 opacity-0 translate-x-full'
-                        }`}
+                    className={`bg-white rounded-lg overflow-hidden transition-all duration-500 ease-in-out flex-1 md:flex-none ${
+                        isServerRunning 
+                            ? 'max-h-[400px] opacity-100 md:w-1/2 md:translate-x-0' 
+                            : 'max-h-0 md:w-0 opacity-0 md:translate-x-full'
+                    }`}
                 >
                     <div className="bg-gray-100 p-4 border-b">
                         <div className="flex items-center gap-2">
