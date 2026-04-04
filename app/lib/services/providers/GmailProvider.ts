@@ -4,6 +4,7 @@ import type { ContactData, ServiceResult, IContactServiceStrategy } from "../typ
 const ownerEmailTemplate = (data: ContactData) => `
 Nome: ${data.name}
 Email: ${data.email}
+IP: ${data.ip || "Não identificado"}
 
 Mensagem:
 ${data.message}

@@ -3,6 +3,25 @@ import { contactSchema } from "@/app/lib/validation";
 import { ContactService } from "@/app/lib/services/ContactServiceStrategy";
 import { GmailProvider } from "@/app/lib/services/providers/GmailProvider";
 
+function getClientIp(request: NextRequest): string {
+  const forwardedFor = request.headers.get("x-forwarded-for");
+  if (forwardedFor) {
+    return forwardedFor.split(",")[0].trim();
+  }
+  
+  const vercelForwarded = request.headers.get("vercel-forwarded-for");
+  if (vercelForwarded) {
+    return vercelForwarded.split(",")[0].trim();
+  }
+  
+  const realIp = request.headers.get("x-real-ip");
+  if (realIp) {
+    return realIp;
+  }
+  
+  return "IP não identificado";
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -17,11 +36,12 @@ export async function POST(request: NextRequest) {
     }
 
     const { name, email, message } = validationResult.data;
+    const ip = getClientIp(request);
 
     const provider = new GmailProvider();
     const contactService = new ContactService(provider);
     
-    const ownerResult = await contactService.sendToOwner({ name, email, message });
+    const ownerResult = await contactService.sendToOwner({ name, email, message, ip });
     if (!ownerResult.success) {
       return NextResponse.json(
         { success: false, error: ownerResult.error },
@@ -29,7 +49,7 @@ export async function POST(request: NextRequest) {
       );
     }
     
-    const visitorResult = await contactService.sendToVisitor({ name, email, message }, email);
+    const visitorResult = await contactService.sendToVisitor({ name, email, message, ip }, email);
     if (!visitorResult.success) {
       console.error("Visitor email failed:", visitorResult.error);
     }
