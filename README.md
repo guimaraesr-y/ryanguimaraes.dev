@@ -1,36 +1,237 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfólio Ryan Guimarães
 
-## Getting Started
+Portfólio pessoal de Ryan Guimarães, desenvolvedor Full-Stack brasileiro especializado em Python, TypeScript, PHP e Java.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Visão Geral do Projeto
+
+**Tipo:** Website pessoal / Portfólio profissional  
+**Tecnologia:** Next.js 16 + React 19 + Tailwind CSS 4  
+**Status:** Em desenvolvimento
+
+Este projeto foi criado para apresentar habilidades, experiência e projetos de forma criativa e interativa, com foco em animações, usabilidade dinâmica e design moderno.
+
+---
+
+## ✅ O que foi implementado
+
+### Seções do Site
+
+1. **Navbar**
+   - Logo com gradiente animado
+   - Links de navegação (Sobre, Experiência, Projetos, Skills, Contato)
+   - Menu mobile responsivo com drawer animado
+   - Links sociais (GitHub, LinkedIn, Website)
+   - Efeito de background ao rolar a página
+
+2. **Hero**
+   - Typed text automático alternando entre frases
+   - Nome com gradiente animado (css animation "caminhando")
+   - Partículas de fundo com animação
+   - Botões CTA com efeitos hover
+   - Scroll indicator animado
+
+3. **About**
+   - Foto de perfil com borda glow
+   - Bio extracted do currículo
+   - Stats animados (contadores)
+   - Certificações exibidas
+   - Links sociais com hover effects
+
+4. **Experience**
+   - Timeline vertical interativa
+   - Cards alternados (desktop) / empilhados (mobile)
+   - Animações de entrada ao scroll
+   - Lista de tecnologias por experiência
+   - Empresas: inChurch (Jr + Estágio), Ondas e Trilhas, FAETEC
+
+5. **Projects**
+   - Grid responsivo (1/2/3 colunas)
+   - Cards com hover effects
+   - Links para GitHub e Live Demo
+   - Tecnologias utilizadas em cada projeto
+   - 6 projetos inclusos
+
+6. **Skills**
+   - Categorias: Frontend, Backend, Frameworks, Database, DevOps
+   - Icons de tecnologias com hover effects
+   - Grid responsivo de habilidades
+
+7. **Terminal Demo** *(Nova seção interativa)*
+   - Simulador de terminal Docker/Shell
+   - Botão que executa animação de "docker-compose up -d --build"
+   - Terminal interativo após deploy fake
+   - Comandos simulados (respostas fake):
+     - `docker ps`, `docker-compose ps`, `docker images`
+     - `ls`, `ls -la`, `pwd`, `cd`, `cd ..`, `cd ~`
+     - `whoami`, `uname -a`, `node --version`, `npm --version`
+     - `python --version`, `git --version`, `clear`, `help`
+   - **Easter Egg:**
+     - Após deploy, aparece "Acesso Restrito"
+     - Pressione ESC para ativar modo hacker
+     - Efeito Matrix Rain
+     - Mensagem secreta revelada
+
+8. **Contact**
+   - Formulário com validação (Zod)
+   - Backend API route (nodemailer) - requires Gmail App Password
+   - Estados de loading, sucesso e erro
+   - Design responsivo
+
+9. **Footer**
+   - Copyright
+   - Links sociais
+   - Créditos
+
+### Funcionalidades Técnicas
+
+- **Animações:** Framer Motion para scroll reveals, transições e hover effects
+- **Tipo:** TypeScript strict mode
+- **Validação:** Zod schemas para formulário de contato
+- **Email:** Nodemailer com Gmail (requer configuração)
+- **Responsividade:** Mobile-first com breakpoints (640px, 768px, 1024px)
+- **Clean Code:** Estrutura organizada com Separation of Concerns
+  - `components/ui/` - Componentes atômicos (Button, Input, Card, GlowBorder)
+  - `components/sections/` - Seções da página
+  - `components/layout/` - Navbar, Footer
+  - `data/` - Dados estáticos tipados
+  - `lib/` - Utilitários (mailer, validation)
+  - `types/` - Definições de tipos TypeScript
+  - `hooks/` - Custom hooks
+
+---
+
+## ⚠️ O que precisa configurar
+
+### 1. Gmail App Password (Formulário de Contato)
+
+O formulário de contato usa nodemailer para enviar emails. Você precisa:
+
+1. Acesse: https://myaccount.google.com/signinoptions/two-step-verification
+2. Ative a **Verificação em duas etapas**
+3. Acesse: https://myaccount.google.com/apppasswords
+4. Selecione **Mail** → **Outro (nome personalizado)**
+5. Digite "Portfólio" e clique em **Gerar**
+6. Copie a senha de 16 caracteres
+7. Configure no arquivo `.env.local`:
+
+```env
+GMAIL_USER=guimaraesryan26@gmail.com
+GMAIL_APP_PASSWORD=sua_senha_aqui
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Foto de Perfil
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+A foto está localizada em: `public/pfp.png`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 📦 Scripts Disponíveis
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+# Desenvolvimento
+npm run dev
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Build de produção
+npm run build
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Iniciar servidor de produção
+npm start
 
-## Deploy on Vercel
+# Verificar código
+npm run lint
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📁 Estrutura de Arquivos
+
+```
+app/
+├── page.tsx                    # Página principal (one-page)
+├── layout.tsx                  # Root layout
+├── globals.css                 # Estilos globais + animações CSS
+├── api/
+│   └── contact/
+│       └── route.ts            # API de contato
+├── components/
+│   ├── ui/                     # Componentes atômicos
+│   │   ├── Button.tsx
+│   │   ├── Card.tsx
+│   │   ├── GlowBorder.tsx
+│   │   └── Input.tsx
+│   ├── sections/               # Seções da página
+│   │   ├── Hero.tsx
+│   │   ├── About.tsx
+│   │   ├── Experience.tsx
+│   │   ├── Projects.tsx
+│   │   ├── Skills.tsx
+│   │   ├── TerminalDemo.tsx
+│   │   └── Contact.tsx
+│   └── layout/                 # Componentes de layout
+│       ├── Navbar.tsx
+│       └── Footer.tsx
+├── data/                       # Dados estáticos
+│   ├── constants.ts
+│   ├── experience.ts
+│   └── projects.ts
+├── hooks/                      # Custom hooks
+│   └── useScrollAnimation.ts
+├── lib/                        # Utilitários
+│   ├── mailer.ts
+│   └── validation.ts
+└── types/                      # Definições de tipos
+    └── index.ts
+```
+
+---
+
+## 🎨 Design System
+
+### Cores
+
+- **Background:** `#0a0a0a` (preto)
+- **Violeta:** `#8B5CF6` (principal)
+- **Ciano:** `#06B6D4` (secundária)
+
+### Tema
+
+- Dark mode com gradiente roxo/azul neon
+- Animações de scroll (Framer Motion)
+- Typed text no Hero
+- Partículas de fundo
+- Timeline interativa
+- Terminal demo interativo + Easter Egg
+
+---
+
+## 📝 Notas Adicionais
+
+- O projeto usa Tailwind CSS v4 com nova sintaxe `@theme`
+- O Easter Egg do Terminal Demo é uma funcionalidade oculta divertida - tente encontrar!
+- O site é responsivo e funciona em mobile, tablet e desktop
+
+---
+
+## 🔜 Próximos Passos (Opcionais)
+
+- [ ] Adicionar mais projetos ao grid
+- [ ] Implementar blog/artigos (Medium integration)
+- [ ] Adicionar analytics (Vercel Analytics ou similar)
+- [ ] SEO optimization (meta tags, sitemap)
+- [ ] Tests unitários
+- [ ] Deploy na Vercel
+
+---
+
+## 📞 Contato
+
+- **Email:** guimaraesryan26@gmail.com
+- **GitHub:** https://github.com/guimaraesr-y
+- **LinkedIn:** https://www.linkedin.com/in/guimaraesry/
+- **Website:** https://ryanguimaraes.dev
+
+---
+
+*Criado em Abril 2026*
