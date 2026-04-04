@@ -93,7 +93,7 @@ export function Hero() {
           </motion.p>
 
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-2 text-center">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 via-purple-500 to-cyan-500">
+            <span className="text-gradient-animated text-transparent bg-clip-text">
               {personalInfo.name}
             </span>
           </h1>
