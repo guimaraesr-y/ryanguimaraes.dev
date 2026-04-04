@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { contactSchema } from "@/app/lib/validation";
-import { sendContactEmail } from "@/app/lib/mailer";
+import { ContactService } from "@/app/lib/services/ContactServiceStrategy";
+import { GmailProvider } from "@/app/lib/services/providers/GmailProvider";
 
 export async function POST(request: NextRequest) {
   try {
@@ -17,13 +18,20 @@ export async function POST(request: NextRequest) {
 
     const { name, email, message } = validationResult.data;
 
-    const result = await sendContactEmail({ name, email, message });
-
-    if (!result.success) {
+    const provider = new GmailProvider();
+    const contactService = new ContactService(provider);
+    
+    const ownerResult = await contactService.sendToOwner({ name, email, message });
+    if (!ownerResult.success) {
       return NextResponse.json(
-        { success: false, error: result.error },
+        { success: false, error: ownerResult.error },
         { status: 500 }
       );
+    }
+    
+    const visitorResult = await contactService.sendToVisitor({ name, email, message }, email);
+    if (!visitorResult.success) {
+      console.error("Visitor email failed:", visitorResult.error);
     }
 
     return NextResponse.json({ success: true });
