@@ -1,4 +1,4 @@
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 import type { ContactData, ServiceResult, IContactServiceStrategy } from "../types";
 
 const ownerEmailTemplate = (data: ContactData) => `
@@ -9,6 +9,19 @@ IP: ${data.ip || "Não identificado"}
 Mensagem:
 ${data.message}
 `;
+
+const escapeHtml = (value: string) =>
+  value.replace(
+    /[&<>"']/g,
+    (character) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;",
+      })[character]!,
+  );
 
 const visitorEmailTemplate = (name: string) => `
 <!DOCTYPE html>
@@ -34,7 +47,7 @@ const visitorEmailTemplate = (name: string) => `
           <tr>
             <td style="padding: 40px 30px;">
               <p style="margin: 0 0 20px; color: #ededed; font-size: 18px; line-height: 1.6;">
-                Olá <strong style="color: #8B5CF6;">${name}</strong>!
+                Olá <strong style="color: #8B5CF6;">${escapeHtml(name)}</strong>!
               </p>
               
               <p style="margin: 0 0 20px; color: #a1a1aa; font-size: 16px; line-height: 1.6;">
@@ -85,44 +98,83 @@ const visitorEmailTemplate = (name: string) => `
 </html>
 `;
 
-export class GmailProvider implements IContactServiceStrategy {
-  private transporter: nodemailer.Transporter;
+const getErrorMessage = (error: unknown) =>
+  error instanceof Error ? error.message : String(error);
+
+export class ResendProvider implements IContactServiceStrategy {
+  private readonly resend: Resend;
+  private readonly fromEmail: string;
+  private readonly ownerEmail: string;
 
   constructor() {
-    this.transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_APP_PASSWORD,
-      },
-    });
+    this.resend = new Resend(process.env.RESEND_API_KEY);
+    this.fromEmail = process.env.RESEND_FROM_EMAIL ?? "";
+    this.ownerEmail = process.env.CONTACT_EMAIL ?? "";
+  }
+
+  private getConfigurationError(): string | undefined {
+    const missingVariables = [
+      ["RESEND_API_KEY", process.env.RESEND_API_KEY],
+      ["RESEND_FROM_EMAIL", this.fromEmail],
+      ["CONTACT_EMAIL", this.ownerEmail],
+    ]
+      .filter(([, value]) => !value)
+      .map(([name]) => name);
+
+    if (missingVariables.length === 0) {
+      return undefined;
+    }
+
+    return `Variáveis de ambiente ausentes: ${missingVariables.join(", ")}`;
   }
 
   async sendToOwner(data: ContactData): Promise<ServiceResult> {
+    const configurationError = this.getConfigurationError();
+    if (configurationError) {
+      return { success: false, error: configurationError };
+    }
+
     try {
-      await this.transporter.sendMail({
-        from: process.env.GMAIL_USER,
-        to: process.env.GMAIL_USER!,
-        subject: `Novo contato do portfólio: ${data.name}`,
+      const { error } = await this.resend.emails.send({
+        from: this.fromEmail,
+        to: this.ownerEmail,
+        replyTo: data.email,
+        subject: `Novo contato do portfólio: ${data.name.replace(/[\r\n]/g, " ")}`,
         text: ownerEmailTemplate(data),
       });
+
+      if (error) {
+        return { success: false, error: error.message };
+      }
+
       return { success: true };
     } catch (error) {
-      return { success: false, error: String(error) };
+      return { success: false, error: getErrorMessage(error) };
     }
   }
 
   async sendToVisitor(data: ContactData, visitorEmail: string): Promise<ServiceResult> {
+    const configurationError = this.getConfigurationError();
+    if (configurationError) {
+      return { success: false, error: configurationError };
+    }
+
     try {
-      await this.transporter.sendMail({
-        from: process.env.GMAIL_USER,
+      const { error } = await this.resend.emails.send({
+        from: this.fromEmail,
         to: visitorEmail,
-        subject: `Obrigado pelo contato, ${data.name}!`,
+        replyTo: this.ownerEmail,
+        subject: `Obrigado pelo contato, ${data.name.replace(/[\r\n]/g, " ")}!`,
         html: visitorEmailTemplate(data.name),
       });
+
+      if (error) {
+        return { success: false, error: error.message };
+      }
+
       return { success: true };
     } catch (error) {
-      return { success: false, error: String(error) };
+      return { success: false, error: getErrorMessage(error) };
     }
   }
 }

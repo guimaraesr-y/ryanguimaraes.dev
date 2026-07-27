@@ -75,7 +75,7 @@ Este projeto foi criado para apresentar habilidades, experiência e projetos de 
 
 8. **Contact**
    - Formulário com validação (Zod)
-   - Backend API route (nodemailer) - requires Gmail App Password
+   - Backend API route com Resend
    - Estados de loading, sucesso e erro
    - Design responsivo
 
@@ -89,7 +89,7 @@ Este projeto foi criado para apresentar habilidades, experiência e projetos de 
 - **Animações:** Framer Motion para scroll reveals, transições e hover effects
 - **Tipo:** TypeScript strict mode
 - **Validação:** Zod schemas para formulário de contato
-- **Email:** Nodemailer com Gmail (requer configuração)
+- **Email:** Resend com domínio de envio verificado
 - **Responsividade:** Mobile-first com breakpoints (640px, 768px, 1024px)
 - **Clean Code:** Estrutura organizada com Separation of Concerns
   - `components/ui/` - Componentes atômicos (Button, Input, Card, GlowBorder)
@@ -104,22 +104,22 @@ Este projeto foi criado para apresentar habilidades, experiência e projetos de 
 
 ## ⚠️ O que precisa configurar
 
-### 1. Gmail App Password (Formulário de Contato)
+### 1. Resend (Formulário de Contato)
 
-O formulário de contato usa nodemailer para enviar emails. Você precisa:
+O formulário de contato usa o Resend para enviar o aviso ao proprietário e a confirmação ao visitante. Você precisa:
 
-1. Acesse: https://myaccount.google.com/signinoptions/two-step-verification
-2. Ative a **Verificação em duas etapas**
-3. Acesse: https://myaccount.google.com/apppasswords
-4. Selecione **Mail** → **Outro (nome personalizado)**
-5. Digite "Portfólio" e clique em **Gerar**
-6. Copie a senha de 16 caracteres
-7. Configure no arquivo `.env.local`:
+1. Crie uma conta em [resend.com](https://resend.com)
+2. Adicione e verifique um domínio de envio
+3. Crie uma API key
+4. Copie `.env.example` para `.env.local` e configure:
 
 ```env
-GMAIL_USER=guimaraesryan26@gmail.com
-GMAIL_APP_PASSWORD=sua_senha_aqui
+RESEND_API_KEY=re_xxxxxxxxx
+RESEND_FROM_EMAIL=Ryan Guimarães <contato@seudominio.com>
+CONTACT_EMAIL=seu-email@exemplo.com
 ```
+
+`RESEND_FROM_EMAIL` deve usar o domínio verificado no Resend. `CONTACT_EMAIL` é o endereço que receberá as mensagens do formulário.
 
 ### 2. Foto de Perfil
 
@@ -179,7 +179,11 @@ app/
 ├── hooks/                      # Custom hooks
 │   └── useScrollAnimation.ts
 ├── lib/                        # Utilitários
-│   ├── mailer.ts
+│   ├── services/
+│   │   ├── ContactServiceStrategy.ts
+│   │   ├── types.ts
+│   │   └── providers/
+│   │       └── ResendProvider.ts
 │   └── validation.ts
 └── types/                      # Definições de tipos
     └── index.ts

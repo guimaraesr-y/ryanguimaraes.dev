@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { contactSchema } from "@/app/lib/validation";
 import { ContactService } from "@/app/lib/services/ContactServiceStrategy";
-import { GmailProvider } from "@/app/lib/services/providers/GmailProvider";
+import { ResendProvider } from "@/app/lib/services/providers/ResendProvider";
 
 function getClientIp(request: NextRequest): string {
   const forwardedFor = request.headers.get("x-forwarded-for");
@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
     const { name, email, message } = validationResult.data;
     const ip = getClientIp(request);
 
-    const provider = new GmailProvider();
+    const provider = new ResendProvider();
     const contactService = new ContactService(provider);
     
     const ownerResult = await contactService.sendToOwner({ name, email, message, ip });
