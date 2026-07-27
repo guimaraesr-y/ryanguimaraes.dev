@@ -41,14 +41,6 @@ export async function POST(request: NextRequest) {
     const provider = new ResendProvider();
     const contactService = new ContactService(provider);
     
-    const ownerResult = await contactService.sendToOwner({ name, email, message, ip });
-    if (!ownerResult.success) {
-      return NextResponse.json(
-        { success: false, error: ownerResult.error },
-        { status: 500 }
-      );
-    }
-    
     const visitorResult = await contactService.sendToVisitor({ name, email, message, ip }, email);
     if (!visitorResult.success) {
       console.error("Visitor email failed:", visitorResult.error);

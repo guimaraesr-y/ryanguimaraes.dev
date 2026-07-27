@@ -1,15 +1,6 @@
 import { Resend } from "resend";
 import type { ContactData, ServiceResult, IContactServiceStrategy } from "../types";
 
-const ownerEmailTemplate = (data: ContactData) => `
-Nome: ${data.name}
-Email: ${data.email}
-IP: ${data.ip || "Não identificado"}
-
-Mensagem:
-${data.message}
-`;
-
 const escapeHtml = (value: string) =>
   value.replace(
     /[&<>"']/g,
@@ -126,31 +117,6 @@ export class ResendProvider implements IContactServiceStrategy {
     }
 
     return `Variáveis de ambiente ausentes: ${missingVariables.join(", ")}`;
-  }
-
-  async sendToOwner(data: ContactData): Promise<ServiceResult> {
-    const configurationError = this.getConfigurationError();
-    if (configurationError) {
-      return { success: false, error: configurationError };
-    }
-
-    try {
-      const { error } = await this.resend.emails.send({
-        from: this.fromEmail,
-        to: this.ownerEmail,
-        replyTo: data.email,
-        subject: `Novo contato do portfólio: ${data.name.replace(/[\r\n]/g, " ")}`,
-        text: ownerEmailTemplate(data),
-      });
-
-      if (error) {
-        return { success: false, error: error.message };
-      }
-
-      return { success: true };
-    } catch (error) {
-      return { success: false, error: getErrorMessage(error) };
-    }
   }
 
   async sendToVisitor(data: ContactData, visitorEmail: string): Promise<ServiceResult> {
