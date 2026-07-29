@@ -31,7 +31,7 @@ function ProjectFeature({ project, index }: { project: Project; index: number })
       >
         <motion.div
           style={{ y: prefersReducedMotion ? 0 : imageY }}
-          className="project-image relative aspect-[5/3] overflow-hidden bg-background"
+          className="project-image relative aspect-[3/2] overflow-hidden bg-background sm:aspect-[5/3]"
         >
           {project.image ? (
             <Image
@@ -39,7 +39,7 @@ function ProjectFeature({ project, index }: { project: Project; index: number })
               alt={`Visual conceitual do projeto ${project.title}`}
               fill
               sizes="(max-width: 768px) 100vw, 58vw"
-              className="object-contain"
+              className="object-fill sm:object-contain"
             />
           ) : null}
           <div className="handwritten absolute left-4 top-4 -rotate-2 bg-paper px-3 py-2 text-sm font-bold text-ink">
@@ -56,7 +56,7 @@ function ProjectFeature({ project, index }: { project: Project; index: number })
         className={`md:col-span-5 ${index % 2 ? "md:order-1" : ""}`}
       >
         <p className="text-sm font-semibold text-acid/90">{project.eyebrow}</p>
-        <h3 className="display mt-5 text-4xl leading-none text-paper sm:text-5xl">
+        <h3 className="display mt-4 text-balance break-words text-3xl leading-[1.02] text-paper sm:mt-5 sm:text-5xl">
           {project.title}
         </h3>
         {project.metric ? (
@@ -113,8 +113,8 @@ export function Projects() {
         <div className="grid gap-8 pb-14 md:grid-cols-12 md:items-end">
           <div className="md:col-span-8">
             <p className="section-label">Projetos que valem uma conversa</p>
-            <h2 className="display mt-5 max-w-[15ch] text-5xl leading-[0.96] text-paper sm:text-6xl">
-              Projetos que me deram trabalho — e alguma coisa para contar.
+            <h2 className="display mt-4 max-w-[17ch] text-balance text-[2.5rem] leading-[0.98] text-paper sm:mt-5 sm:max-w-[15ch] sm:text-6xl sm:leading-[0.96]">
+              Projetos que deram trabalho — e renderam boas histórias.
             </h2>
           </div>
           <p className="max-w-sm text-sm leading-7 text-muted md:col-span-4 md:justify-self-end">

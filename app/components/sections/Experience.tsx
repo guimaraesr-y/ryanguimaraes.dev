@@ -10,7 +10,7 @@ export function Experience() {
         <div className="grid gap-8 pb-14 md:grid-cols-12 md:items-end">
           <div className="md:col-span-8">
             <p className="section-label text-coral">Trabalho também muda a gente</p>
-            <h2 className="display mt-5 max-w-[15ch] text-5xl leading-[0.96] text-paper sm:text-6xl">
+            <h2 className="display mt-5 max-w-[15ch] text-balance text-[2.5rem] leading-[1] text-paper sm:text-6xl sm:leading-[0.96]">
               Cada lugar mudou meu jeito de trabalhar.
             </h2>
           </div>

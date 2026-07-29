@@ -18,7 +18,7 @@ export function Skills() {
         <div className="grid gap-8 pb-16 md:grid-cols-12 md:items-end">
           <div className="md:col-span-8">
             <p className="section-label !text-white/75">Ferramentas, sem torcida</p>
-            <h2 className="display mt-5 max-w-[13ch] text-5xl leading-[0.96] sm:text-6xl">
+            <h2 className="display mt-5 max-w-[13ch] text-balance text-[2.5rem] leading-[1] sm:text-6xl sm:leading-[0.96]">
               O que tenho usado ultimamente.
             </h2>
           </div>

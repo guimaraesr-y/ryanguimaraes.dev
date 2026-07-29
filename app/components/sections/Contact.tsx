@@ -88,7 +88,7 @@ export function Contact({ contactEmail }: ContactProps) {
       <div className="section-shell relative grid gap-12 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-5">
           <p className="section-label">Se você chegou até aqui, já temos assunto.</p>
-          <h2 className="display mt-5 max-w-[10ch] text-5xl leading-[0.94] text-paper sm:text-7xl">
+          <h2 className="display mt-5 max-w-[10ch] text-balance text-[2.5rem] leading-[1] text-paper sm:text-7xl sm:leading-[0.94]">
             Pode me chamar de Ryan.
           </h2>
           <p className="mt-8 max-w-md text-base leading-8 text-muted">

@@ -144,7 +144,7 @@ button {
   }
 
   .section-shell {
-    width: min(100% - 1.25rem, 76rem);
+    width: min(100% - 2.5rem, 76rem);
   }
 }
 

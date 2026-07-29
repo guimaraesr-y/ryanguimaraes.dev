@@ -32,7 +32,7 @@ export function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.6 }}
-              className="display max-w-[16ch] text-5xl leading-[0.98] sm:text-6xl"
+              className="display max-w-[16ch] text-balance text-[2.5rem] leading-[1] sm:text-6xl sm:leading-[0.98]"
             >
               Eu não planejei “ser full-stack”. Só nunca gostei de parar na metade do problema.
             </motion.h2>

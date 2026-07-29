@@ -56,7 +56,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.08 }}
-            className="display max-w-[12ch] text-[clamp(3.35rem,7.3vw,7.2rem)] leading-[0.9] text-paper"
+            className="display max-w-[12ch] text-[clamp(2.9rem,7.3vw,7.2rem)] leading-[0.92] text-paper"
           >
             Gosto de entender
             <span className="block text-acid">por que quebrou.</span>
