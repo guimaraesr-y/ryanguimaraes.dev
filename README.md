@@ -26,60 +26,43 @@ Este projeto foi criado para apresentar habilidades, experiência e projetos de 
    - Efeito de background ao rolar a página
 
 2. **Hero**
-   - Typed text automático alternando entre frases
-   - Nome com gradiente animado (css animation "caminhando")
-   - Partículas de fundo com animação
-   - Botões CTA com efeitos hover
-   - Scroll indicator animado
+   - Posicionamento profissional focado em backend e produto
+   - Retrato autoral com parallax discreto
+   - Indicadores de experiência e resultado
+   - CTAs para projetos e GitHub
 
 3. **About**
-   - Foto de perfil com borda glow
-   - Bio extracted do currículo
-   - Stats animados (contadores)
+   - Narrativa editorial sobre abordagem de engenharia
+   - Contexto profissional e áreas de foco
+   - Indicadores de experiência
    - Certificações exibidas
-   - Links sociais com hover effects
+   - Link para trajetória no LinkedIn
 
 4. **Experience**
-   - Timeline vertical interativa
-   - Cards alternados (desktop) / empilhados (mobile)
-   - Animações de entrada ao scroll
+   - Linha profissional contínua e responsiva
+   - Períodos, responsabilidades e contexto por posição
    - Lista de tecnologias por experiência
    - Empresas: inChurch (Jr + Estágio), Ondas e Trilhas, FAETEC
 
 5. **Projects**
-   - Grid responsivo (1/2/3 colunas)
-   - Cards com hover effects
+   - Estudos de caso com imagens vetoriais autorais
+   - Métricas, decisões técnicas e parallax sutil
    - Links para GitHub e Live Demo
    - Tecnologias utilizadas em cada projeto
    - 6 projetos inclusos
 
 6. **Skills**
    - Categorias: Frontend, Backend, Frameworks, Database, DevOps
-   - Icons de tecnologias com hover effects
-   - Grid responsivo de habilidades
+   - Contexto de uso para cada grupo de ferramentas
+   - Apresentação editorial sem icon wall
 
-7. **Terminal Demo** *(Nova seção interativa)*
-   - Simulador de terminal Docker/Shell
-   - Botão que executa animação de "docker-compose up -d --build"
-   - Terminal interativo após deploy fake
-   - Comandos simulados (respostas fake):
-     - `docker ps`, `docker-compose ps`, `docker images`
-     - `ls`, `ls -la`, `pwd`, `cd`, `cd ..`, `cd ~`
-     - `whoami`, `uname -a`, `node --version`, `npm --version`
-     - `python --version`, `git --version`, `clear`, `help`
-   - **Easter Egg:**
-     - Após deploy, aparece "Acesso Restrito"
-     - Pressione ESC para ativar modo hacker
-     - Efeito Matrix Rain
-     - Mensagem secreta revelada
-
-8. **Contact**
+7. **Contact**
    - Formulário com validação (Zod)
    - Backend API route com Resend
    - Estados de loading, sucesso e erro
    - Design responsivo
 
-9. **Footer**
+8. **Footer**
    - Copyright
    - Links sociais
    - Créditos
@@ -167,7 +150,6 @@ app/
 │   │   ├── Experience.tsx
 │   │   ├── Projects.tsx
 │   │   ├── Skills.tsx
-│   │   ├── TerminalDemo.tsx
 │   │   └── Contact.tsx
 │   └── layout/                 # Componentes de layout
 │       ├── Navbar.tsx
@@ -206,14 +188,12 @@ app/
 - Typed text no Hero
 - Partículas de fundo
 - Timeline interativa
-- Terminal demo interativo + Easter Egg
 
 ---
 
 ## 📝 Notas Adicionais
 
 - O projeto usa Tailwind CSS v4 com nova sintaxe `@theme`
-- O Easter Egg do Terminal Demo é uma funcionalidade oculta divertida - tente encontrar!
 - O site é responsivo e funciona em mobile, tablet e desktop
 
 ---

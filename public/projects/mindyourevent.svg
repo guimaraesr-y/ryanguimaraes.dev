@@ -1,0 +1,19 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="720" fill="#EDE9DF"/>
+  <path d="M0 90H1200M0 180H1200M0 270H1200M0 360H1200M0 450H1200M0 540H1200M0 630H1200" stroke="#D7D1C4"/>
+  <path d="M120 0V720M240 0V720M360 0V720M480 0V720M600 0V720M720 0V720M840 0V720M960 0V720M1080 0V720" stroke="#D7D1C4"/>
+  <rect x="72" y="64" width="1056" height="592" rx="26" fill="#10110F"/>
+  <circle cx="110" cy="103" r="7" fill="#F16A4B"/>
+  <circle cx="136" cy="103" r="7" fill="#E9D55C"/>
+  <circle cx="162" cy="103" r="7" fill="#A8E06C"/>
+  <text x="96" y="170" fill="#FAF7EF" font-family="Arial, sans-serif" font-size="30" font-weight="700">MindYourEvent</text>
+  <text x="96" y="205" fill="#8C9188" font-family="Arial, sans-serif" font-size="17">availability / week 32</text>
+  <rect x="96" y="244" width="1008" height="360" rx="16" fill="#181A17" stroke="#343832"/>
+  <path d="M240 244V604M384 244V604M528 244V604M672 244V604M816 244V604M960 244V604" stroke="#30332E"/>
+  <path d="M96 316H1104M96 388H1104M96 460H1104M96 532H1104" stroke="#30332E"/>
+  <rect x="254" y="332" width="260" height="40" rx="8" fill="#3157FF"/>
+  <rect x="688" y="404" width="260" height="40" rx="8" fill="#A8E06C"/>
+  <rect x="398" y="476" width="404" height="40" rx="8" fill="#F16A4B"/>
+  <circle cx="1040" cy="189" r="36" fill="#3157FF"/>
+  <path d="M1026 189H1054M1040 175V203" stroke="white" stroke-width="3" stroke-linecap="round"/>
+</svg>

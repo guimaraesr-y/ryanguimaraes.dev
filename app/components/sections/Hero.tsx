@@ -1,158 +1,161 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import Image from "next/image";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { ArrowDownRight, ArrowUpRight } from "lucide-react";
+import { FaGithub } from "react-icons/fa";
+import { useRef } from "react";
 import { personalInfo } from "@/app/data/constants";
 
+const proofPoints = [
+  { value: "173 ms", label: "meu número favorito até agora" },
+  { value: "3+ anos", label: "aprendendo em produção" },
+  { value: "prod + legado", label: "onde eu me sinto em casa" },
+];
+
 export function Hero() {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true });
-  const [displayText, setDisplayText] = useState("");
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [stringIndex, setStringIndex] = useState(0);
-  const strings = personalInfo.typedStrings;
-
-  useEffect(() => {
-    const currentString = strings[stringIndex];
-
-    if (isDeleting) {
-      const timer = setTimeout(() => {
-        setDisplayText(currentString.substring(0, currentIndex - 1));
-        setCurrentIndex((prev) => prev - 1);
-      }, 50);
-      return () => clearTimeout(timer);
-    } else {
-      const timer = setTimeout(() => {
-        setDisplayText(currentString.substring(0, currentIndex + 1));
-        setCurrentIndex((prev) => prev + 1);
-      }, 80);
-      return () => clearTimeout(timer);
-    }
-
-    if (!isDeleting && currentIndex === currentString.length) {
-      const timer = setTimeout(() => setIsDeleting(true), 2000);
-      return () => clearTimeout(timer);
-    }
-
-    if (isDeleting && currentIndex === 0) {
-      setIsDeleting(false);
-      setStringIndex((prev) => (prev + 1) % strings.length);
-    }
-  }, [currentIndex, isDeleting, stringIndex, strings]);
-
-  const scrollToProjects = () => {
-    const element = document.querySelector("#projects");
-    element?.scrollIntoView({ behavior: "smooth" });
-  };
+  const sectionRef = useRef<HTMLElement>(null);
+  const prefersReducedMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const portraitY = useTransform(scrollYProgress, [0, 1], [0, 90]);
+  const markerY = useTransform(scrollYProgress, [0, 1], [0, -70]);
 
   return (
     <section
-      ref={ref}
-      className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden px-4"
+      ref={sectionRef}
+      className="relative min-h-screen overflow-hidden border-b border-line pt-24 sm:pt-28"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-violet-900/20 via-black to-black" />
-      
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="particle" style={{ left: '5%', top: '10%', animationDelay: '0s' }} />
-        <div className="particle" style={{ left: '15%', top: '80%', animationDelay: '2s' }} />
-        <div className="particle" style={{ left: '25%', top: '30%', animationDelay: '4s' }} />
-        <div className="particle" style={{ left: '35%', top: '70%', animationDelay: '1s' }} />
-        <div className="particle" style={{ left: '45%', top: '20%', animationDelay: '3s' }} />
-        <div className="particle" style={{ left: '55%', top: '90%', animationDelay: '5s' }} />
-        <div className="particle" style={{ left: '65%', top: '40%', animationDelay: '2.5s' }} />
-        <div className="particle" style={{ left: '75%', top: '60%', animationDelay: '0.5s' }} />
-        <div className="particle" style={{ left: '85%', top: '15%', animationDelay: '3.5s' }} />
-        <div className="particle" style={{ left: '95%', top: '85%', animationDelay: '1.5s' }} />
-        <div className="particle" style={{ left: '10%', top: '50%', animationDelay: '4.5s' }} />
-        <div className="particle" style={{ left: '20%', top: '25%', animationDelay: '2.2s' }} />
-        <div className="particle" style={{ left: '30%', top: '75%', animationDelay: '0.8s' }} />
-        <div className="particle" style={{ left: '40%', top: '45%', animationDelay: '3.2s' }} />
-        <div className="particle" style={{ left: '50%', top: '10%', animationDelay: '1.8s' }} />
-        <div className="particle" style={{ left: '60%', top: '55%', animationDelay: '4.2s' }} />
-        <div className="particle" style={{ left: '70%', top: '35%', animationDelay: '2.8s' }} />
-        <div className="particle" style={{ left: '80%', top: '65%', animationDelay: '0.3s' }} />
-        <div className="particle" style={{ left: '90%', top: '20%', animationDelay: '3.8s' }} />
-        <div className="particle" style={{ left: '3%', top: '95%', animationDelay: '1.2s' }} />
-      </div>
+      <div className="site-grid pointer-events-none absolute inset-0 opacity-70" />
+      <motion.div
+        aria-hidden="true"
+        style={{ y: prefersReducedMotion ? 0 : markerY }}
+        className="display pointer-events-none absolute -right-4 top-16 select-none text-[10rem] leading-none text-white/[0.025] sm:text-[18rem] lg:right-4 lg:text-[24rem]"
+      >
+        RG
+      </motion.div>
 
-      <div className="max-w-4xl w-full mx-auto relative z-10 flex flex-col items-center text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="flex flex-col items-center"
-        >
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.2 }}
-            className="text-violet-400 text-lg mb-4 font-medium"
+      <div className="section-shell relative z-10 grid min-h-[calc(100vh-7rem)] items-center gap-14 pb-14 lg:grid-cols-[1.08fr_0.92fr] lg:gap-20">
+        <div className="pt-6 lg:pt-0">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55 }}
+            className="mb-9 flex flex-wrap items-center gap-4"
           >
-            Olá, meu nome é
-          </motion.p>
-
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-2 text-center">
-            <span className="text-gradient-animated text-transparent bg-clip-text">
-              {personalInfo.name}
+            <span className="eyebrow">Oi, eu sou o Ryan — pode entrar</span>
+            <span className="mono inline-flex items-center gap-2 text-[0.68rem] uppercase tracking-[0.1em] text-muted">
+              <span className="h-2 w-2 rounded-full bg-acid shadow-[0_0_18px_rgba(168,224,108,.7)]" />
+              escrevendo código no Rio de Janeiro
             </span>
-          </h1>
+          </motion.div>
 
-          <div className="text-2xl md:text-4xl text-white/80 h-16 flex items-center justify-center mb-6">
-            <span className="border-r-2 border-violet-500 pr-2 animate-pulse">
-              {displayText}
-            </span>
-          </div>
+          <motion.h1
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.08 }}
+            className="display max-w-[12ch] text-[clamp(3.35rem,7.3vw,7.2rem)] leading-[0.9] text-paper"
+          >
+            Gosto de entender
+            <span className="block text-acid">por que quebrou.</span>
+            <span className="block text-[0.68em] italic text-paper">E deixar melhor.</span>
+          </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.4 }}
-            className="text-white/60 text-lg md:text-xl max-w-2xl mb-10"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.18 }}
+            className="mt-8 max-w-xl text-base leading-7 text-muted sm:text-lg sm:leading-8"
           >
-            {personalInfo.title} • Python • Java • TypeScript • PHP • Docker
+            Backend é meu ponto de partida, não uma caixa. Eu sigo o problema até onde
+            ele pedir: arquitetura, integração, interface, deploy ou uma boa conversa com quem usa.
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4"
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.28 }}
+            className="mt-9 flex flex-wrap gap-3"
           >
-            <motion.button
-              onClick={scrollToProjects}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-semibold rounded-lg shadow-lg shadow-violet-500/25 hover:shadow-violet-500/50 transition-all duration-300"
+            <a
+              href="#projects"
+              className="focus-ring inline-flex items-center gap-3 bg-acid px-5 py-3.5 text-sm font-bold text-ink transition-transform hover:-translate-y-0.5"
             >
-              Ver Projetos
-            </motion.button>
-            <motion.a
-              href="#contact"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 border-2 border-white/20 text-white font-semibold rounded-lg hover:border-violet-500 hover:bg-violet-500/10 transition-all duration-300"
+              Ver o que andei construindo
+              <ArrowDownRight className="h-4 w-4" />
+            </a>
+            <a
+              href={personalInfo.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="focus-ring inline-flex items-center gap-3 border border-line px-5 py-3.5 text-sm font-semibold text-paper transition-colors hover:border-paper/40 hover:bg-white/[0.04]"
             >
-              Falar Comigo
-            </motion.a>
+              <FaGithub className="h-4 w-4" />
+              GitHub
+              <ArrowUpRight className="h-3.5 w-3.5 text-muted" />
+            </a>
           </motion.div>
+
+          <motion.dl
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.38 }}
+            className="mt-12 grid max-w-2xl grid-cols-3 border-y border-line"
+          >
+            {proofPoints.map((item) => (
+              <div
+                key={item.value}
+                className="border-r border-line px-3 py-5 first:pl-0 last:border-r-0 sm:px-5"
+              >
+                <dt className="display text-xl text-paper sm:text-2xl">{item.value}</dt>
+                <dd className="mt-1 text-[0.66rem] leading-4 text-muted sm:text-xs">
+                  {item.label}
+                </dd>
+              </div>
+            ))}
+          </motion.dl>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.75, delay: 0.12 }}
+          className="relative mx-auto w-full max-w-lg pb-10 lg:mx-0"
+        >
+          <motion.div
+            style={{ y: prefersReducedMotion ? 0 : portraitY }}
+            className="rough-circle relative aspect-[4/5] overflow-hidden bg-[#242820]"
+          >
+            <Image
+              src="/pfp.png"
+              alt={`Retrato de ${personalInfo.name}`}
+              fill
+              priority
+              sizes="(max-width: 1024px) 90vw, 42vw"
+              className="object-cover object-center grayscale-[12%] contrast-[1.04]"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/75 via-transparent to-transparent" />
+            <div className="mono absolute bottom-5 left-5 text-[0.65rem] uppercase tracking-[0.16em] text-paper/70">
+              22.9068° S · 43.1729° W
+            </div>
+          </motion.div>
+
+          <div className="paper-note absolute -bottom-1 -left-3 max-w-[15rem] -rotate-2 bg-coral p-5 text-ink sm:-left-8 sm:p-6">
+            <p className="handwritten text-base font-bold">
+              hoje, na minha mesa:
+            </p>
+            <p className="mt-2 text-sm font-semibold leading-5 text-ink/80">
+              Django, Rails, integrações e aquele bug que só aparece em produção.
+            </p>
+          </div>
+
+          <div className="handwritten absolute -right-2 top-8 rotate-3 bg-acid px-4 py-2 text-sm font-bold text-ink sm:-right-10">
+            curioso por sistemas inteiros ↗
+          </div>
         </motion.div>
       </div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        transition={{ delay: 1, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center"
-        >
-          <motion.div className="w-1 h-2 bg-white/50 rounded-full mt-2" />
-        </motion.div>
-      </motion.div>
     </section>
   );
 }

@@ -3,6 +3,10 @@ export interface Project {
   title: string;
   description: string;
   technologies: string[];
+  image?: string;
+  eyebrow?: string;
+  metric?: string;
+  featured?: boolean;
   githubUrl?: string;
   liveUrl?: string;
 }

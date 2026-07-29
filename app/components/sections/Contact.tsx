@@ -1,12 +1,11 @@
 "use client";
 
-import { useState, FormEvent } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
-import { useRef } from "react";
-import { Button } from "@/app/components/ui/Button";
+import { AnimatePresence, motion } from "framer-motion";
+import { AlertCircle, ArrowUpRight, CheckCircle, Send } from "lucide-react";
+import { FormEvent, useState } from "react";
 import { Input, Textarea } from "@/app/components/ui/Input";
+import { personalInfo } from "@/app/data/constants";
 import { contactSchema } from "@/app/lib/validation";
-import { Send, CheckCircle, AlertCircle } from "lucide-react";
 
 interface FormData {
   name: string;
@@ -21,9 +20,6 @@ interface FormErrors {
 }
 
 export function Contact() {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-  
   const [formData, setFormData] = useState<FormData>({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState<FormErrors>({});
   const [isLoading, setIsLoading] = useState(false);
@@ -35,8 +31,7 @@ export function Contact() {
     if (!result.success) {
       const fieldErrors: FormErrors = {};
       result.error.issues.forEach((issue) => {
-        const field = issue.path[0] as keyof FormErrors;
-        fieldErrors[field] = issue.message;
+        fieldErrors[issue.path[0] as keyof FormErrors] = issue.message;
       });
       setErrors(fieldErrors);
       return false;
@@ -45,9 +40,8 @@ export function Contact() {
     return true;
   };
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault();
     if (!validateForm()) return;
 
     setIsLoading(true);
@@ -59,16 +53,15 @@ export function Contact() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-
       const data = await response.json();
 
       if (data.success) {
         setStatus("success");
-        setStatusMessage("Mensagem enviada com sucesso!");
+        setStatusMessage("Mensagem enviada. Obrigado pelo contexto!");
         setFormData({ name: "", email: "", message: "" });
       } else {
         setStatus("error");
-        setStatusMessage(data.error || "Erro ao enviar mensagem");
+        setStatusMessage(data.error || "Não foi possível enviar agora.");
       }
     } catch {
       setStatus("error");
@@ -78,77 +71,83 @@ export function Contact() {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = event.target;
+    setFormData((current) => ({ ...current, [name]: value }));
     if (errors[name as keyof FormErrors]) {
-      setErrors((prev) => ({ ...prev, [name]: undefined }));
+      setErrors((current) => ({ ...current, [name]: undefined }));
     }
   };
 
   return (
-    <section id="contact" className="py-24 relative" ref={ref}>
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-violet-900/20 via-black to-black" />
-      
-      <div className="max-w-3xl mx-auto px-4 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Entre em <span className="text-violet-500">Contato</span>
+    <section id="contact" className="section-rule relative overflow-hidden py-24 lg:py-32">
+      <div aria-hidden="true" className="site-grid absolute inset-0 opacity-40" />
+      <div className="section-shell relative grid gap-12 lg:grid-cols-12 lg:gap-16">
+        <div className="lg:col-span-5">
+          <p className="eyebrow">se você chegou até aqui</p>
+          <h2 className="display mt-5 max-w-[9ch] text-6xl leading-[0.9] text-paper sm:text-8xl">
+            Pode me chamar de Ryan.
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-violet-500 to-cyan-500 mx-auto rounded-full" />
-          <p className="text-white/60 mt-4">Vamos conversar sobre seu próximo projeto!</p>
-        </motion.div>
+          <p className="mt-8 max-w-md text-base leading-8 text-muted">
+            Pode ser uma vaga, um projeto, uma dúvida técnica ou só uma conversa boa
+            sobre software. Se tiver contexto, melhor ainda.
+          </p>
+          <a
+            href={`mailto:${personalInfo.email}`}
+            className="focus-ring mt-8 inline-flex items-center gap-2 border-b border-paper/50 pb-1 text-sm font-bold text-paper"
+          >
+            {personalInfo.email}
+            <ArrowUpRight className="h-4 w-4" />
+          </a>
+        </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="bg-white/5 border border-white/10 rounded-2xl p-8"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.55 }}
+          className="border border-line bg-background/80 p-5 backdrop-blur sm:p-8 lg:col-span-7"
         >
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid md:grid-cols-2 gap-6">
+          <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+            <div className="grid gap-6 md:grid-cols-2">
               <div>
-                <label htmlFor="name" className="block text-white/70 text-sm mb-2">
-                  Nome
+                <label htmlFor="name" className="mono mb-2 block text-[0.66rem] uppercase tracking-[0.1em] text-muted">
+                  Seu nome
                 </label>
                 <Input
                   id="name"
                   name="name"
-                  placeholder="Seu nome"
+                  autoComplete="name"
+                  placeholder="Como devo chamar você?"
                   value={formData.name}
                   onChange={handleChange}
                   error={errors.name}
                 />
               </div>
               <div>
-                <label htmlFor="email" className="block text-white/70 text-sm mb-2">
-                  Email
+                <label htmlFor="email" className="mono mb-2 block text-[0.66rem] uppercase tracking-[0.1em] text-muted">
+                  E-mail
                 </label>
                 <Input
                   id="email"
                   name="email"
                   type="email"
-                  placeholder="seu@email.com"
+                  autoComplete="email"
+                  placeholder="voce@empresa.com"
                   value={formData.email}
                   onChange={handleChange}
                   error={errors.email}
                 />
               </div>
             </div>
-
             <div>
-              <label htmlFor="message" className="block text-white/70 text-sm mb-2">
-                Mensagem
+              <label htmlFor="message" className="mono mb-2 block text-[0.66rem] uppercase tracking-[0.1em] text-muted">
+                O que você quer construir ou melhorar?
               </label>
               <Textarea
                 id="message"
                 name="message"
-                placeholder="Sua mensagem..."
+                placeholder="Contexto, objetivo, prazo ou o que já foi tentado..."
                 value={formData.message}
                 onChange={handleChange}
                 error={errors.message}
@@ -156,38 +155,37 @@ export function Contact() {
             </div>
 
             <AnimatePresence mode="wait">
-              {status === "success" && (
+              {status !== "idle" ? (
                 <motion.div
-                  initial={{ opacity: 0, y: -10 }}
+                  key={status}
+                  initial={{ opacity: 0, y: -8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="flex items-center gap-2 text-green-400 p-4 bg-green-400/10 rounded-lg"
+                  exit={{ opacity: 0, y: -8 }}
+                  role="status"
+                  className={`flex items-center gap-3 border p-4 text-sm ${
+                    status === "success"
+                      ? "border-acid/40 bg-acid/10 text-acid"
+                      : "border-coral/40 bg-coral/10 text-coral"
+                  }`}
                 >
-                  <CheckCircle className="w-5 h-5" />
+                  {status === "success" ? (
+                    <CheckCircle className="h-5 w-5" />
+                  ) : (
+                    <AlertCircle className="h-5 w-5" />
+                  )}
                   {statusMessage}
                 </motion.div>
-              )}
-              {status === "error" && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="flex items-center gap-2 text-red-400 p-4 bg-red-400/10 rounded-lg"
-                >
-                  <AlertCircle className="w-5 h-5" />
-                  {statusMessage}
-                </motion.div>
-              )}
+              ) : null}
             </AnimatePresence>
 
-            <div className="flex justify-center pt-4">
-              <Button type="submit" isLoading={isLoading}>
-                <span className="flex items-center gap-2">
-                  <Send className="w-4 h-4" />
-                  Enviar Mensagem
-                </span>
-              </Button>
-            </div>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="focus-ring inline-flex items-center gap-3 bg-acid px-5 py-3.5 text-sm font-bold text-ink transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {isLoading ? "Enviando..." : "Enviar contexto"}
+              <Send className="h-4 w-4" />
+            </button>
           </form>
         </motion.div>
       </div>

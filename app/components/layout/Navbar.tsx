@@ -1,141 +1,123 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { FaGithub, FaLinkedin, FaGlobe, FaEnvelope } from "react-icons/fa";
+import { useEffect, useState } from "react";
 import { navLinks, personalInfo } from "@/app/data/constants";
 
 export function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => setScrolled(window.scrollY > 24);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    element?.scrollIntoView({ behavior: "smooth" });
+    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
     setIsMobileMenuOpen(false);
   };
 
   return (
     <>
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-black/80 backdrop-blur-lg border-b border-white/10" : "bg-transparent"
-          }`}
+      <nav
+        aria-label="Navegação principal"
+        className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+          scrolled ? "border-b border-line bg-background/90 backdrop-blur-xl" : "bg-transparent"
+        }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <motion.a
-              href="#"
-              whileHover={{ scale: 1.05 }}
-              className="text-xl font-bold text-white"
-            >
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-cyan-500">
-                Ryan • Fullstack Dev
-              </span>
-            </motion.a>
+        <div className="section-shell flex h-20 items-center justify-between">
+          <a href="#" className="focus-ring group" aria-label="Voltar ao início">
+            <span className="handwritten block text-lg font-bold text-paper transition-colors group-hover:text-acid">
+              ryan.guimarães
+            </span>
+            <span className="mono mt-0.5 hidden text-[0.55rem] uppercase tracking-[0.12em] text-muted sm:block">
+              ~/meu-canto-na-web
+            </span>
+          </a>
 
-            <div className="hidden md:flex items-center gap-8">
-              {navLinks.map((link) => (
-                <motion.button
-                  key={link.name}
-                  onClick={() => scrollToSection(link.href)}
-                  whileHover={{ y: -2 }}
-                  className="text-white/70 hover:text-white text-sm font-medium transition-colors"
-                >
-                  {link.name}
-                </motion.button>
-              ))}
-            </div>
-
-            <div className="hidden md:flex items-center gap-4">
-              <a
-                href={personalInfo.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/70 hover:text-white transition-colors"
+          <div className="hidden items-center gap-7 lg:flex">
+            {navLinks.map((link) => (
+              <button
+                key={link.name}
+                onClick={() => scrollToSection(link.href)}
+                className="focus-ring mono text-[0.65rem] uppercase tracking-[0.1em] text-muted transition-colors hover:text-paper"
               >
-                <FaGithub className="w-5 h-5" />
-              </a>
-              <a
-                href={personalInfo.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/70 hover:text-white transition-colors"
-              >
-                <FaLinkedin className="w-5 h-5" />
-              </a>
-              <a
-                href={personalInfo.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/70 hover:text-white transition-colors"
-              >
-                <FaGlobe className="w-5 h-5" />
-              </a>
-            </div>
-
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden text-white"
-            >
-              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
+                {link.name}
+              </button>
+            ))}
           </div>
+
+          <div className="hidden items-center gap-4 lg:flex">
+            <a
+              href={personalInfo.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="focus-ring mono text-[0.65rem] uppercase tracking-[0.1em] text-muted hover:text-paper"
+            >
+              GitHub
+            </a>
+            <a
+              href="#contact"
+              className="focus-ring bg-acid px-4 py-2.5 text-xs font-bold text-ink transition-transform hover:-translate-y-0.5"
+            >
+              me chama
+            </a>
+          </div>
+
+          <button
+            type="button"
+            aria-label={isMobileMenuOpen ? "Fechar menu" : "Abrir menu"}
+            aria-expanded={isMobileMenuOpen}
+            onClick={() => setIsMobileMenuOpen((open) => !open)}
+            className="focus-ring grid h-11 w-11 place-items-center border border-line text-paper lg:hidden"
+          >
+            {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
-      </motion.nav>
+      </nav>
 
       <AnimatePresence>
-        {isMobileMenuOpen && (
+        {isMobileMenuOpen ? (
           <motion.div
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "100%" }}
-            transition={{ type: "tween", duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-lg md:hidden"
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.22 }}
+            className="fixed inset-0 z-40 bg-background px-5 pb-8 pt-28 lg:hidden"
           >
-            <div className="flex flex-col items-center justify-center h-full gap-8">
-              {navLinks.map((link, i) => (
-                <motion.button
-                  key={link.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1 }}
-                  onClick={() => scrollToSection(link.href)}
-                  className="text-2xl text-white font-medium"
+            <div className="flex h-full flex-col">
+              <div className="border-t border-line">
+                {navLinks.map((link, index) => (
+                  <button
+                    key={link.name}
+                    onClick={() => scrollToSection(link.href)}
+                    className="focus-ring display flex w-full items-center justify-between border-b border-line py-5 text-left text-4xl text-paper"
+                  >
+                    {link.name}
+                    <span className="mono text-[0.62rem] text-muted">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                  </button>
+                ))}
+              </div>
+              <div className="mt-auto flex items-end justify-between border-t border-line pt-5">
+                <p className="mono max-w-[14rem] text-[0.62rem] uppercase leading-5 tracking-[0.1em] text-muted">
+                    Meu canto na web. Feito no Rio, mexido aos poucos e sempre em construção.
+                </p>
+                <a
+                  href={`mailto:${personalInfo.email}`}
+                  className="focus-ring bg-acid px-4 py-3 text-xs font-bold text-ink"
                 >
-                  {link.name}
-                </motion.button>
-              ))}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
-                className="flex gap-6 mt-4"
-              >
-                <a href={personalInfo.github} className="text-white/70 hover:text-white">
-                  <FaGithub className="w-6 h-6" />
+                  E-mail
                 </a>
-                <a href={personalInfo.linkedin} className="text-white/70 hover:text-white">
-                  <FaLinkedin className="w-6 h-6" />
-                </a>
-                <a href={`mailto:${personalInfo.email}`} className="text-white/70 hover:text-white">
-                  <FaEnvelope className="w-6 h-6" />
-                </a>
-              </motion.div>
+              </div>
             </div>
           </motion.div>
-        )}
+        ) : null}
       </AnimatePresence>
     </>
   );

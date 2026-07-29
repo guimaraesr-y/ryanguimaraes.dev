@@ -1,88 +1,62 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import { skills } from "@/app/data/constants";
-import {
-  FaReact, FaNodeJs, FaPython, FaPhp, FaJava, FaDocker, FaGitAlt, FaAws, FaLinux,
-  FaHtml5, FaCss3, FaJs, FaDatabase
-} from "react-icons/fa";
-import { SiNextdotjs, SiTypescript, SiDjango, SiSpring, SiLaravel, SiMysql, SiPostgresql, SiMongodb, SiExpress } from "react-icons/si";
 
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  react: FaReact,
-  nextjs: SiNextdotjs,
-  typescript: SiTypescript,
-  javascript: FaJs,
-  css: FaCss3,
-  html: FaHtml5,
-  nodejs: FaNodeJs,
-  express: SiExpress,
-  python: FaPython,
-  php: FaPhp,
-  java: FaJava,
-  django: SiDjango,
-  spring: SiSpring,
-  laravel: SiLaravel,
-  mysql: SiMysql,
-  postgresql: SiPostgresql,
-  mongodb: SiMongodb,
-  docker: FaDocker,
-  git: FaGitAlt,
-  aws: FaAws,
-  linux: FaLinux,
+const categoryDescriptions: Record<string, string> = {
+  Frontend: "Interfaces de produto com atenção a estado, acessibilidade e performance.",
+  Backend: "Serviços, regras de negócio e integrações que precisam continuar funcionando.",
+  Frameworks: "Ferramentas escolhidas pelo problema, não por preferência de torcida.",
+  Database: "Modelagem e consulta com custo, consistência e evolução em mente.",
+  DevOps: "Ambientes reproduzíveis e software observável do desenvolvimento à produção.",
 };
 
 export function Skills() {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
   return (
-    <section id="skills" className="py-24 relative" ref={ref}>
-      <div className="max-w-5xl mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Minhas <span className="text-violet-500">Skills</span>
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-violet-500 to-cyan-500 mx-auto rounded-full" />
-        </motion.div>
+    <section id="skills" className="bg-electric py-24 text-white lg:py-32">
+      <div className="section-shell">
+        <div className="grid gap-8 pb-16 md:grid-cols-12 md:items-end">
+          <div className="md:col-span-8">
+            <p className="eyebrow !text-acid">minha caixa de ferramentas</p>
+            <h2 className="display mt-5 max-w-[12ch] text-5xl leading-[0.94] sm:text-7xl">
+              As ferramentas mudam. A curiosidade fica.
+            </h2>
+          </div>
+          <p className="max-w-sm text-sm leading-7 text-white/70 md:col-span-4 md:justify-self-end">
+            O que tenho usado para construir, manter e investigar — inclusive quando
+            a resposta certa é aprender alguma coisa nova.
+          </p>
+        </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          {skills.map((category, catIndex) => (
+        <div className="border-t border-white/25">
+          {skills.map((category, index) => (
             <motion.div
               key={category.name}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: catIndex * 0.1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.45, delay: Math.min(index * 0.05, 0.16) }}
+              className="grid gap-5 border-b border-white/25 py-7 md:grid-cols-12 md:items-center"
             >
-              <div className="bg-white/5 border border-white/10 rounded-xl p-6 h-full">
-                <h3 className="text-xl font-bold text-white mb-4 text-center">
-                  {category.name}
-                </h3>
-                <div className="grid grid-cols-2 gap-3">
-                  {category.skills.map((skill, skillIndex) => {
-                    const Icon = iconMap[skill.icon];
-                    return (
-                      <motion.div
-                        key={skill.name}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                        transition={{ delay: catIndex * 0.1 + skillIndex * 0.05 }}
-                        whileHover={{ scale: 1.05, y: -3 }}
-                        className="flex items-center gap-2 p-2 bg-white/5 rounded-lg border border-white/5 hover:border-violet-500/50 hover:bg-white/10 transition-all cursor-default"
-                      >
-                        {Icon && <Icon className="w-4 h-4 text-violet-400" />}
-                        <span className="text-white/70 text-sm">{skill.name}</span>
-                      </motion.div>
-                    );
-                  })}
-                </div>
+              <div className="md:col-span-3">
+                <span className="mono mr-4 text-[0.65rem] text-white/45">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h3 className="inline text-xl font-bold">{category.name}</h3>
               </div>
+              <p className="text-sm leading-6 text-white/65 md:col-span-4">
+                {categoryDescriptions[category.name]}
+              </p>
+              <ul className="flex flex-wrap gap-2 md:col-span-5 md:justify-end">
+                {category.skills.map((skill) => (
+                  <li
+                    key={skill.name}
+                    className="mono border border-white/25 px-3 py-2 text-[0.66rem] uppercase tracking-[0.08em]"
+                  >
+                    {skill.name}
+                  </li>
+                ))}
+              </ul>
             </motion.div>
           ))}
         </div>

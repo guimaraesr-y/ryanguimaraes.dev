@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useInView } from "framer-motion";
 
 interface UseScrollAnimationOptions {
@@ -10,16 +10,9 @@ interface UseScrollAnimationOptions {
 export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
   const { threshold = 0.1 } = options;
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true });
-  const [hasAnimated, setHasAnimated] = useState(false);
+  const isInView = useInView(ref, { once: true, amount: threshold });
 
-  useEffect(() => {
-    if (isInView && !hasAnimated) {
-      setHasAnimated(true);
-    }
-  }, [isInView, hasAnimated]);
-
-  return { ref, isInView: hasAnimated || isInView };
+  return { ref, isInView };
 }
 
 export function useCountUp(endValue: number, duration: number = 2000) {

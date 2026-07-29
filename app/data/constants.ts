@@ -48,10 +48,10 @@ export const skills: SkillCategory[] = [
 ];
 
 export const stats: Stat[] = [
-  { value: 3, label: "Anos de Experiência", suffix: "+" },
-  { value: 20, label: "Projetos Concluídos", suffix: "+" },
-  { value: 3, label: "Certificações", suffix: "" },
-  { value: 6, label: "Tecnologias Principais", suffix: "+" },
+  { value: 3, label: "anos resolvendo problemas", suffix: "+" },
+  { value: 20, label: "projetos que chegaram ao fim", suffix: "+" },
+  { value: 3, label: "certificações que colecionei", suffix: "" },
+  { value: 6, label: "ferramentas que uso sempre", suffix: "+" },
 ];
 
 export const socialLinks: SocialLink[] = [
@@ -65,7 +65,7 @@ export const personalInfo = {
   title: "Full-Stack Developer",
   email: "guimaraesryan26@gmail.com",
   phone: "(21) 9 9657-0056",
-  location: "Rio de Janeiro, Brazil",
+  location: "Rio de Janeiro, RJ",
   website: "https://ryanguimaraes.dev",
   github: "https://github.com/guimaraesr-y",
   linkedin: "https://www.linkedin.com/in/guimaraesry/",
@@ -73,18 +73,12 @@ export const personalInfo = {
 Especialista em arquiteturas modernas como Django, Spring Boot e Laravel.
 Reconhecido pela comunicação clara e colaboração efetiva.
 Versátil em ambientes Windows e Linux, comprometido com soluções escaláveis e de alta qualidade.`,
-  typedStrings: [
-    "Desenvolvedor Full-Stack",
-    "Criando soluções escaláveis",
-    "Apaixonado por código",
-    "Building with Python & Java",
-  ],
 };
 
 export const navLinks = [
   { name: "Sobre", href: "#about" },
-  { name: "Experiência", href: "#experience" },
   { name: "Projetos", href: "#projects" },
-  { name: "Skills", href: "#skills" },
+  { name: "Experiência", href: "#experience" },
+  { name: "Stack", href: "#skills" },
   { name: "Contato", href: "#contact" },
 ];

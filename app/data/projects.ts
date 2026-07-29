@@ -7,6 +7,10 @@ export const projects: Project[] = [
     description:
       "Plataforma de agendamento inteligente com cruzamento automático de disponibilidades. Clean Architecture com Next.js e PostgreSQL.",
     technologies: ["Next.js", "TypeScript", "PostgreSQL", "Vitest"],
+    image: "/projects/mindyourevent.svg",
+    eyebrow: "Produto / Scheduling",
+    metric: "Clean Architecture",
+    featured: true,
     githubUrl: "https://github.com/guimaraesr-y/mind-your-event",
     liveUrl: "https://mindyourevent.vercel.app/",
   },
@@ -16,6 +20,10 @@ export const projects: Project[] = [
     description:
       "API RESTful completa para rede social com usuários, publicações, curtidas, comentários e sistema de seguidores.",
     technologies: ["Java", "Spring Boot", "RESTful", "MySQL"],
+    image: "/projects/socialties.svg",
+    eyebrow: "Backend / Social graph",
+    metric: "API REST completa",
+    featured: true,
     githubUrl: "https://github.com/guimaraesr-y/api-socialties",
   },
   {
@@ -40,12 +48,16 @@ export const projects: Project[] = [
     description:
       "Pipeline ETL em Node.js que otimiza consulta de 100k+ registros de Google Sheets para 173ms.",
     technologies: ["Node.js", "Next.js", "PostgreSQL", "Docker Compose"],
+    image: "/projects/ondas-pipeline.svg",
+    eyebrow: "Dados / Performance",
+    metric: "30 min → 173 ms",
+    featured: true,
   },
   {
     id: "cpu-emulator",
     title: "CPU Emulator",
     description:
-      "Emulador de CPU e assemblerwritten em C, com instruções personalizadas e memória simulada.",
+      "Emulador de CPU e assembler escrito em C, com instruções personalizadas e memória simulada.",
     technologies: ["C", "Emulator", "Assembler"],
     githubUrl: "https://github.com/guimaraesr-y/cpu-emulator",
   },

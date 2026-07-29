@@ -1,0 +1,20 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="720" fill="#111310"/>
+  <circle cx="1030" cy="76" r="260" fill="#A8E06C" fill-opacity=".08"/>
+  <circle cx="150" cy="670" r="300" fill="#3157FF" fill-opacity=".10"/>
+  <text x="74" y="98" fill="#A8E06C" font-family="monospace" font-size="18">SOCIALTIES / API MAP</text>
+  <text x="74" y="150" fill="#F6F2E8" font-family="Arial, sans-serif" font-size="46" font-weight="700">A social graph,<tspan x="74" dy="54">built as a system.</tspan></text>
+  <path d="M504 357L718 238M504 357L756 485M504 357L320 226M504 357L300 500M718 238L938 334M756 485L938 334" stroke="#545A50" stroke-width="2"/>
+  <circle cx="504" cy="357" r="82" fill="#3157FF"/>
+  <circle cx="718" cy="238" r="58" fill="#A8E06C"/>
+  <circle cx="756" cy="485" r="58" fill="#F16A4B"/>
+  <circle cx="320" cy="226" r="48" fill="#EDE9DF"/>
+  <circle cx="300" cy="500" r="48" fill="#EDE9DF"/>
+  <circle cx="938" cy="334" r="70" fill="#20251E" stroke="#A8E06C" stroke-width="2"/>
+  <text x="463" y="364" fill="white" font-family="monospace" font-size="20">users</text>
+  <text x="685" y="244" fill="#111310" font-family="monospace" font-size="16">posts</text>
+  <text x="715" y="491" fill="white" font-family="monospace" font-size="16">follows</text>
+  <text x="282" y="232" fill="#111310" font-family="monospace" font-size="14">likes</text>
+  <text x="247" y="506" fill="#111310" font-family="monospace" font-size="14">comments</text>
+  <text x="909" y="340" fill="#A8E06C" font-family="monospace" font-size="15">REST</text>
+</svg>

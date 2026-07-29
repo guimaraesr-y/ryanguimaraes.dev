@@ -4,7 +4,6 @@ import { Hero } from "@/app/components/sections/Hero";
 import { About } from "@/app/components/sections/About";
 import { Experience } from "@/app/components/sections/Experience";
 import { Projects } from "@/app/components/sections/Projects";
-import { TerminalDemo } from "@/app/components/sections/TerminalDemo";
 import { Skills } from "@/app/components/sections/Skills";
 import { Contact } from "@/app/components/sections/Contact";
 import { Footer } from "@/app/components/layout/Footer";
@@ -26,14 +25,13 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-black text-white">
-      <Navbar />
-      <Hero />
-      <About />
-      <Experience />
-      <Projects />
-      <TerminalDemo />
-      <Skills />
+      <main className="min-h-screen bg-background text-foreground">
+        <Navbar />
+        <Hero />
+        <About />
+        <Projects />
+        <Experience />
+        <Skills />
       <Contact />
       <Footer />
     </main>

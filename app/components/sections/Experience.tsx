@@ -1,105 +1,75 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import { experiences } from "@/app/data/experience";
-import { Briefcase, Calendar } from "lucide-react";
 
 export function Experience() {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
   return (
-    <section id="experience" className="py-24 relative" ref={ref}>
-      <div className="max-w-5xl mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Experiência <span className="text-violet-500">Profissional</span>
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-violet-500 to-cyan-500 mx-auto rounded-full" />
-        </motion.div>
-
-        <div className="relative pl-8 md:pl-0">
-          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-violet-600 via-violet-500 to-cyan-500 md:-translate-x-1/2">
-            <motion.div
-              initial={{ scaleY: 0 }}
-              animate={isInView ? { scaleY: 1 } : {}}
-              transition={{ duration: 1.5, ease: "easeOut" }}
-              className="absolute inset-0 bg-gradient-to-b from-violet-600 via-violet-500 to-cyan-500 origin-top"
-            />
+    <section id="experience" className="section-rule py-24 lg:py-32">
+      <div className="section-shell">
+        <div className="grid gap-8 pb-14 md:grid-cols-12 md:items-end">
+          <div className="md:col-span-8">
+            <p className="eyebrow">por onde eu passei</p>
+            <h2 className="display mt-5 text-5xl leading-[0.94] text-paper sm:text-7xl">
+              Cada lugar mudou meu jeito de trabalhar.
+            </h2>
           </div>
+          <p className="max-w-sm text-sm leading-7 text-muted md:col-span-4 md:justify-self-end">
+            Comecei perto de quem usava o sistema. Quero continuar assim,
+            mesmo quando o trabalho acontece muitas camadas abaixo da interface.
+          </p>
+        </div>
 
-          <div className="space-y-12">
-            {experiences.map((exp, index) => (
-              <motion.div
-                key={exp.id}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className={`relative flex flex-col md:flex-row ${
-                  index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                }`}
-              >
-                <div className="flex-1 md:px-8 md:w-1/2">
-                  <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    className="bg-white/5 border border-white/10 rounded-xl p-6 hover:border-violet-500/50 transition-all duration-300"
+        <div className="border-t border-line">
+          {experiences.map((experience, index) => (
+            <motion.article
+              key={experience.id}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.5, delay: Math.min(index * 0.06, 0.18) }}
+              className="grid gap-6 border-b border-line py-9 md:grid-cols-12 md:gap-8"
+            >
+              <div className="md:col-span-3">
+                <p className="mono text-[0.68rem] uppercase leading-5 tracking-[0.1em] text-muted">
+                  {experience.period}
+                </p>
+                {index === 0 ? (
+                  <span className="mono mt-4 inline-flex items-center gap-2 text-[0.62rem] uppercase tracking-[0.12em] text-acid">
+                    <span className="h-1.5 w-1.5 rounded-full bg-acid" />
+                    posição atual
+                  </span>
+                ) : null}
+              </div>
+              <div className="md:col-span-4">
+                <h3 className="display text-3xl leading-none text-paper">
+                  {experience.role}
+                </h3>
+                <p className="mt-3 text-sm font-bold text-acid">{experience.company}</p>
+                <ul className="mt-6 flex flex-wrap gap-x-4 gap-y-2">
+                  {experience.technologies.map((technology) => (
+                    <li
+                      key={technology}
+                      className="mono text-[0.62rem] uppercase tracking-[0.08em] text-paper/55"
+                    >
+                      {technology}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <ul className="space-y-3 md:col-span-5">
+                {experience.description.map((description) => (
+                  <li
+                    key={description}
+                    className="grid grid-cols-[1rem_1fr] gap-3 text-sm leading-6 text-muted"
                   >
-                    <div className="flex items-start gap-3 mb-3">
-                      <div className="p-2 bg-violet-600/20 rounded-lg">
-                        <Briefcase className="w-5 h-5 text-violet-400" />
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-bold text-white">{exp.role}</h3>
-                        <p className="text-violet-400 font-medium">{exp.company}</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-2 text-white/50 text-sm mb-4">
-                      <Calendar className="w-4 h-4" />
-                      <span>{exp.period}</span>
-                    </div>
-
-                    <ul className="space-y-2 mb-4">
-                      {exp.description.map((desc, i) => (
-                        <li key={i} className="text-white/70 text-sm flex items-start gap-2">
-                          <span className="w-1.5 h-1.5 bg-violet-500 rounded-full mt-1.5 flex-shrink-0" />
-                          {desc}
-                        </li>
-                      ))}
-                    </ul>
-
-                    <div className="flex flex-wrap gap-2">
-                      {exp.technologies.map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-3 py-1 text-xs bg-white/5 text-white/70 rounded-full border border-white/10"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </motion.div>
-                </div>
-
-                <div className="absolute left-0 md:left-1/2 -translate-x-1/2 mt-6 md:mt-0">
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={isInView ? { scale: 1 } : {}}
-                    transition={{ delay: index * 0.2 + 0.3 }}
-                    className="w-4 h-4 bg-violet-500 rounded-full border-4 border-black z-10"
-                  />
-                </div>
-
-                <div className="flex-1 md:px-8 md:w-1/2" />
-              </motion.div>
-            ))}
-          </div>
+                    <span aria-hidden="true" className="mt-[0.7rem] h-px w-3 bg-paper/35" />
+                    {description}
+                  </li>
+                ))}
+              </ul>
+            </motion.article>
+          ))}
         </div>
       </div>
     </section>

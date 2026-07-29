@@ -10,38 +10,37 @@ interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   error?: string;
 }
 
-const inputBaseStyles = "w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500 transition-all duration-300";
+const inputBaseStyles =
+  "focus-ring w-full border border-line bg-white/[0.025] px-4 py-3.5 text-paper placeholder:text-muted/55 transition-colors hover:border-paper/25 focus:border-acid";
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ error, className = "", ...props }, ref) => {
-    return (
-      <div className="w-full">
-        <input
-          ref={ref}
-          className={`${inputBaseStyles} ${error ? "border-red-500" : ""} ${className}`}
-          {...props}
-        />
-        {error && <p className="mt-1 text-sm text-red-400">{error}</p>}
-      </div>
-    );
-  }
+  ({ error, className = "", ...props }, ref) => (
+    <div className="w-full">
+      <input
+        ref={ref}
+        aria-invalid={Boolean(error)}
+        className={`${inputBaseStyles} ${error ? "border-coral" : ""} ${className}`}
+        {...props}
+      />
+      {error ? <p className="mono mt-2 text-[0.65rem] text-coral">{error}</p> : null}
+    </div>
+  ),
 );
 
 Input.displayName = "Input";
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ error, className = "", ...props }, ref) => {
-    return (
-      <div className="w-full">
-        <textarea
-          ref={ref}
-          className={`${inputBaseStyles} min-h-[120px] resize-y ${error ? "border-red-500" : ""} ${className}`}
-          {...props}
-        />
-        {error && <p className="mt-1 text-sm text-red-400">{error}</p>}
-      </div>
-    );
-  }
+  ({ error, className = "", ...props }, ref) => (
+    <div className="w-full">
+      <textarea
+        ref={ref}
+        aria-invalid={Boolean(error)}
+        className={`${inputBaseStyles} min-h-36 resize-y ${error ? "border-coral" : ""} ${className}`}
+        {...props}
+      />
+      {error ? <p className="mono mt-2 text-[0.65rem] text-coral">{error}</p> : null}
+    </div>
+  ),
 );
 
 Textarea.displayName = "Textarea";
