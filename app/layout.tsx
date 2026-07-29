@@ -80,6 +80,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
+      <head>
+        <meta
+          property="og:logo"
+          content="https://ryanguimaraes.dev/favicon.svg"
+        />
+      </head>
       <body className="antialiased">
         {children}
       </body>
