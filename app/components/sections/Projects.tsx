@@ -15,7 +15,7 @@ function ProjectFeature({ project, index }: { project: Project; index: number })
     target: itemRef,
     offset: ["start end", "end start"],
   });
-  const imageY = useTransform(scrollYProgress, [0, 1], [45, -45]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [18, -18]);
 
   return (
     <article
@@ -29,25 +29,23 @@ function ProjectFeature({ project, index }: { project: Project; index: number })
         transition={{ duration: 0.6 }}
         className={`md:col-span-7 ${index % 2 ? "md:order-2" : ""}`}
       >
-        <div className="project-image relative aspect-[5/3] overflow-hidden bg-paper">
+        <motion.div
+          style={{ y: prefersReducedMotion ? 0 : imageY }}
+          className="project-image relative aspect-[5/3] overflow-hidden bg-background"
+        >
           {project.image ? (
-            <motion.div
-              style={{ y: prefersReducedMotion ? 0 : imageY }}
-              className="absolute -inset-y-12 inset-x-0"
-            >
-              <Image
-                src={project.image}
-                alt={`Visual conceitual do projeto ${project.title}`}
-                fill
-                sizes="(max-width: 768px) 100vw, 58vw"
-                className="object-cover"
-              />
-            </motion.div>
+            <Image
+              src={project.image}
+              alt={`Visual conceitual do projeto ${project.title}`}
+              fill
+              sizes="(max-width: 768px) 100vw, 58vw"
+              className="object-contain"
+            />
           ) : null}
           <div className="handwritten absolute left-4 top-4 -rotate-2 bg-paper px-3 py-2 text-sm font-bold text-ink">
             projeto 0{index + 1}
           </div>
-        </div>
+        </motion.div>
       </motion.div>
 
       <motion.div
