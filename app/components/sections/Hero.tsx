@@ -45,10 +45,10 @@ export function Hero() {
             transition={{ duration: 0.55 }}
             className="mb-9 flex flex-wrap items-center gap-x-4 gap-y-2"
           >
-            <span className="text-sm font-bold text-paper">Oi, eu sou o Ryan.</span>
+            <span className="text-sm font-bold text-paper">Oi, eu sou Ryan.</span>
             <span className="inline-flex items-center gap-2 text-sm text-muted">
               <span className="h-2 w-2 rounded-full bg-acid shadow-[0_0_18px_rgba(168,224,108,.7)]" />
-              escrevendo código no Rio de Janeiro
+              seguimos codando no Rio de Janeiro, Brasil
             </span>
           </motion.div>
 

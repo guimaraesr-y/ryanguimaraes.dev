@@ -63,7 +63,7 @@ export const personalInfo = {
   name: "Ryan Guimarães",
   title: "Full-Stack Developer",
   phone: "(21) 9 9657-0056",
-  location: "Rio de Janeiro, RJ",
+  location: "Rio de Janeiro",
   website: "https://ryanguimaraes.dev",
   github: "https://github.com/guimaraesr-y",
   linkedin: "https://www.linkedin.com/in/guimaraesry/",

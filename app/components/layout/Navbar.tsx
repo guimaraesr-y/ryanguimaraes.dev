@@ -36,10 +36,10 @@ export function Navbar({ contactEmail }: NavbarProps) {
         <div className="section-shell flex h-20 items-center justify-between">
           <a href="#" className="focus-ring group" aria-label="Voltar ao início">
             <span className="handwritten block text-lg font-bold text-paper transition-colors group-hover:text-acid">
-              ryan.guimarães
+              Ryan Guimarães
             </span>
             <span className="mt-0.5 hidden text-[0.65rem] text-muted sm:block">
-              meu canto na web
+              meu espaço (nada privado) na web
             </span>
           </a>
 
