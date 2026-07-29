@@ -57,13 +57,11 @@ export const stats: Stat[] = [
 export const socialLinks: SocialLink[] = [
   { name: "GitHub", url: "https://github.com/guimaraesr-y", icon: "github" },
   { name: "LinkedIn", url: "https://www.linkedin.com/in/guimaraesry/", icon: "linkedin" },
-  { name: "Email", url: "mailto:guimaraesryan26@gmail.com", icon: "mail" },
 ];
 
 export const personalInfo = {
   name: "Ryan Guimarães",
   title: "Full-Stack Developer",
-  email: "guimaraesryan26@gmail.com",
   phone: "(21) 9 9657-0056",
   location: "Rio de Janeiro, RJ",
   website: "https://ryanguimaraes.dev",

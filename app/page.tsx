@@ -24,16 +24,18 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+  const contactEmail = process.env.CONTACT_EMAIL;
+
   return (
       <main className="min-h-screen bg-background text-foreground">
-        <Navbar />
+        <Navbar contactEmail={contactEmail} />
         <Hero />
         <About />
         <Projects />
         <Experience />
         <Skills />
-      <Contact />
-      <Footer />
+      <Contact contactEmail={contactEmail} />
+      <Footer contactEmail={contactEmail} />
     </main>
   );
 }

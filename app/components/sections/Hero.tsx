@@ -43,10 +43,10 @@ export function Hero() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55 }}
-            className="mb-9 flex flex-wrap items-center gap-4"
+            className="mb-9 flex flex-wrap items-center gap-x-4 gap-y-2"
           >
-            <span className="eyebrow">Oi, eu sou o Ryan — pode entrar</span>
-            <span className="mono inline-flex items-center gap-2 text-[0.68rem] uppercase tracking-[0.1em] text-muted">
+            <span className="text-sm font-bold text-paper">Oi, eu sou o Ryan.</span>
+            <span className="inline-flex items-center gap-2 text-sm text-muted">
               <span className="h-2 w-2 rounded-full bg-acid shadow-[0_0_18px_rgba(168,224,108,.7)]" />
               escrevendo código no Rio de Janeiro
             </span>
@@ -137,8 +137,8 @@ export function Hero() {
               className="object-cover object-center grayscale-[12%] contrast-[1.04]"
             />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/75 via-transparent to-transparent" />
-            <div className="mono absolute bottom-5 left-5 text-[0.65rem] uppercase tracking-[0.16em] text-paper/70">
-              22.9068° S · 43.1729° W
+            <div className="absolute bottom-5 left-5 text-xs text-paper/70">
+              Rio de Janeiro · RJ
             </div>
           </motion.div>
 

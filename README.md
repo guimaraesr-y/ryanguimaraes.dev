@@ -211,7 +211,7 @@ app/
 
 ## 📞 Contato
 
-- **Email:** guimaraesryan26@gmail.com
+- **Email:** configurado pela variável `CONTACT_EMAIL`
 - **GitHub:** https://github.com/guimaraesr-y
 - **LinkedIn:** https://www.linkedin.com/in/guimaraesry/
 - **Website:** https://ryanguimaraes.dev

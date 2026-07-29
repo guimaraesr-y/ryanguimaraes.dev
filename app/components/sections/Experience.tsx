@@ -9,8 +9,8 @@ export function Experience() {
       <div className="section-shell">
         <div className="grid gap-8 pb-14 md:grid-cols-12 md:items-end">
           <div className="md:col-span-8">
-            <p className="eyebrow">por onde eu passei</p>
-            <h2 className="display mt-5 text-5xl leading-[0.94] text-paper sm:text-7xl">
+            <p className="section-label text-coral">Trabalho também muda a gente</p>
+            <h2 className="display mt-5 max-w-[15ch] text-5xl leading-[0.96] text-paper sm:text-6xl">
               Cada lugar mudou meu jeito de trabalhar.
             </h2>
           </div>
@@ -31,13 +31,13 @@ export function Experience() {
               className="grid gap-6 border-b border-line py-9 md:grid-cols-12 md:gap-8"
             >
               <div className="md:col-span-3">
-                <p className="mono text-[0.68rem] uppercase leading-5 tracking-[0.1em] text-muted">
+                <p className="text-sm leading-5 text-muted">
                   {experience.period}
                 </p>
                 {index === 0 ? (
-                  <span className="mono mt-4 inline-flex items-center gap-2 text-[0.62rem] uppercase tracking-[0.12em] text-acid">
+                  <span className="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-acid">
                     <span className="h-1.5 w-1.5 rounded-full bg-acid" />
-                    posição atual
+                    onde estou agora
                   </span>
                 ) : null}
               </div>
@@ -50,7 +50,7 @@ export function Experience() {
                   {experience.technologies.map((technology) => (
                     <li
                       key={technology}
-                      className="mono text-[0.62rem] uppercase tracking-[0.08em] text-paper/55"
+                      className="text-xs text-paper/55"
                     >
                       {technology}
                     </li>
@@ -63,7 +63,7 @@ export function Experience() {
                     key={description}
                     className="grid grid-cols-[1rem_1fr] gap-3 text-sm leading-6 text-muted"
                   >
-                    <span aria-hidden="true" className="mt-[0.7rem] h-px w-3 bg-paper/35" />
+                    <span aria-hidden="true" className="text-acid/70">↳</span>
                     {description}
                   </li>
                 ))}

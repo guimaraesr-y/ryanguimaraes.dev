@@ -4,7 +4,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { AlertCircle, ArrowUpRight, CheckCircle, Send } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { Input, Textarea } from "@/app/components/ui/Input";
-import { personalInfo } from "@/app/data/constants";
 import { contactSchema } from "@/app/lib/validation";
 
 interface FormData {
@@ -19,7 +18,11 @@ interface FormErrors {
   message?: string;
 }
 
-export function Contact() {
+interface ContactProps {
+  contactEmail?: string;
+}
+
+export function Contact({ contactEmail }: ContactProps) {
   const [formData, setFormData] = useState<FormData>({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState<FormErrors>({});
   const [isLoading, setIsLoading] = useState(false);
@@ -84,21 +87,23 @@ export function Contact() {
       <div aria-hidden="true" className="site-grid absolute inset-0 opacity-40" />
       <div className="section-shell relative grid gap-12 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-5">
-          <p className="eyebrow">se você chegou até aqui</p>
-          <h2 className="display mt-5 max-w-[9ch] text-6xl leading-[0.9] text-paper sm:text-8xl">
+          <p className="section-label">Se você chegou até aqui, já temos assunto.</p>
+          <h2 className="display mt-5 max-w-[10ch] text-5xl leading-[0.94] text-paper sm:text-7xl">
             Pode me chamar de Ryan.
           </h2>
           <p className="mt-8 max-w-md text-base leading-8 text-muted">
             Pode ser uma vaga, um projeto, uma dúvida técnica ou só uma conversa boa
             sobre software. Se tiver contexto, melhor ainda.
           </p>
-          <a
-            href={`mailto:${personalInfo.email}`}
-            className="focus-ring mt-8 inline-flex items-center gap-2 border-b border-paper/50 pb-1 text-sm font-bold text-paper"
-          >
-            {personalInfo.email}
-            <ArrowUpRight className="h-4 w-4" />
-          </a>
+          {contactEmail ? (
+            <a
+              href={`mailto:${contactEmail}`}
+              className="focus-ring mt-8 inline-flex items-center gap-2 border-b border-paper/50 pb-1 text-sm font-bold text-paper"
+            >
+              {contactEmail}
+              <ArrowUpRight className="h-4 w-4" />
+            </a>
+          ) : null}
         </div>
 
         <motion.div
@@ -111,7 +116,7 @@ export function Contact() {
           <form onSubmit={handleSubmit} className="space-y-6" noValidate>
             <div className="grid gap-6 md:grid-cols-2">
               <div>
-                <label htmlFor="name" className="mono mb-2 block text-[0.66rem] uppercase tracking-[0.1em] text-muted">
+                <label htmlFor="name" className="mb-2 block text-xs font-semibold text-muted">
                   Seu nome
                 </label>
                 <Input
@@ -125,7 +130,7 @@ export function Contact() {
                 />
               </div>
               <div>
-                <label htmlFor="email" className="mono mb-2 block text-[0.66rem] uppercase tracking-[0.1em] text-muted">
+                <label htmlFor="email" className="mb-2 block text-xs font-semibold text-muted">
                   E-mail
                 </label>
                 <Input
@@ -141,7 +146,7 @@ export function Contact() {
               </div>
             </div>
             <div>
-              <label htmlFor="message" className="mono mb-2 block text-[0.66rem] uppercase tracking-[0.1em] text-muted">
+              <label htmlFor="message" className="mb-2 block text-xs font-semibold text-muted">
                 O que você quer construir ou melhorar?
               </label>
               <Textarea

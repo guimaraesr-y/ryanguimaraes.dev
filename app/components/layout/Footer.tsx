@@ -1,18 +1,26 @@
 import { ArrowUpRight } from "lucide-react";
 import { personalInfo, socialLinks } from "@/app/data/constants";
 
-export function Footer() {
+interface FooterProps {
+  contactEmail?: string;
+}
+
+export function Footer({ contactEmail }: FooterProps) {
+  const links = contactEmail
+    ? [...socialLinks, { name: "Email", url: `mailto:${contactEmail}`, icon: "mail" }]
+    : socialLinks;
+
   return (
     <footer className="border-t border-line bg-background py-8">
       <div className="section-shell grid gap-6 text-sm md:grid-cols-3 md:items-center">
         <div>
           <p className="font-bold text-paper">{personalInfo.name}</p>
-          <p className="mono mt-1 text-[0.6rem] uppercase tracking-[0.12em] text-muted">
+          <p className="mt-1 text-xs text-muted">
             © {new Date().getFullYear()} · Rio de Janeiro
           </p>
         </div>
         <div className="flex flex-wrap gap-5 md:justify-center">
-          {socialLinks.map((link) => (
+          {links.map((link) => (
             <a
               key={link.name}
               href={link.url}
@@ -25,7 +33,7 @@ export function Footer() {
             </a>
           ))}
         </div>
-        <p className="mono text-[0.6rem] uppercase leading-5 tracking-[0.1em] text-muted md:text-right">
+        <p className="text-xs leading-5 text-muted md:text-right">
           Ainda mexendo nisso — como todo projeto pessoal deveria ser.
         </p>
       </div>

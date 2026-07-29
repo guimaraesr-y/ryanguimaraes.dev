@@ -57,13 +57,13 @@ function ProjectFeature({ project, index }: { project: Project; index: number })
         transition={{ duration: 0.6, delay: 0.08 }}
         className={`md:col-span-5 ${index % 2 ? "md:order-1" : ""}`}
       >
-        <p className="eyebrow">{project.eyebrow}</p>
+        <p className="text-sm font-semibold text-acid/90">{project.eyebrow}</p>
         <h3 className="display mt-5 text-4xl leading-none text-paper sm:text-5xl">
           {project.title}
         </h3>
         {project.metric ? (
-          <p className="mono mt-6 text-xs uppercase tracking-[0.12em] text-acid">
-            Resultado — {project.metric}
+          <p className="mt-6 text-sm font-semibold text-acid">
+            O que ficou: {project.metric}
           </p>
         ) : null}
         <p className="mt-5 max-w-md text-sm leading-7 text-muted sm:text-base">
@@ -71,7 +71,7 @@ function ProjectFeature({ project, index }: { project: Project; index: number })
         </p>
         <ul className="mt-6 flex flex-wrap gap-x-4 gap-y-2">
           {project.technologies.map((tech) => (
-            <li key={tech} className="mono text-[0.68rem] uppercase tracking-[0.08em] text-paper/65">
+            <li key={tech} className="text-xs text-paper/60">
               {tech}
             </li>
           ))}
@@ -114,9 +114,9 @@ export function Projects() {
       <div className="section-shell">
         <div className="grid gap-8 pb-14 md:grid-cols-12 md:items-end">
           <div className="md:col-span-8">
-            <p className="eyebrow">coisas que construí</p>
-            <h2 className="display mt-5 max-w-[11ch] text-5xl leading-[0.94] text-paper sm:text-7xl">
-              Alguns projetos que me ensinaram bastante.
+            <p className="section-label">Projetos que valem uma conversa</p>
+            <h2 className="display mt-5 max-w-[15ch] text-5xl leading-[0.96] text-paper sm:text-6xl">
+              Projetos que me deram trabalho — e alguma coisa para contar.
             </h2>
           </div>
           <p className="max-w-sm text-sm leading-7 text-muted md:col-span-4 md:justify-self-end">
@@ -131,7 +131,7 @@ export function Projects() {
 
         <div className="mt-10 border-t border-line">
           <div className="grid gap-4 py-8 md:grid-cols-12">
-            <p className="mono text-xs uppercase tracking-[0.14em] text-acid md:col-span-3">
+            <p className="handwritten -rotate-1 text-lg font-bold text-acid md:col-span-3">
               outras coisas da bancada
             </p>
             <div className="md:col-span-9">
@@ -158,8 +158,8 @@ export function Projects() {
                       <ArrowUpRight className="h-4 w-4" />
                     </a>
                   ) : (
-                    <span className="mono text-[0.65rem] uppercase tracking-[0.1em] text-muted">
-                      Case interno
+                    <span className="text-xs text-muted">
+                      projeto interno
                     </span>
                   )}
                 </article>

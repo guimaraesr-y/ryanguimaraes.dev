@@ -12,24 +12,17 @@ export function About() {
       <div className="section-shell">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-4">
-            <p className="eyebrow !text-electric">um pouco de contexto</p>
-            <div className="mt-10 border-t border-ink/20 pt-5">
-              <p className="mono text-[0.68rem] uppercase tracking-[0.12em] text-ink/55">
-                onde estou
+            <p className="section-label !text-electric">Sobre mim, sem muita cerimônia</p>
+            <div className="mt-8 max-w-sm space-y-4 text-sm leading-6 text-ink/65">
+              <p>
+                Moro no <strong className="font-semibold text-ink">{personalInfo.location}</strong> e
+                quase sempre começo pelo backend.
               </p>
-              <p className="mt-2 font-semibold">{personalInfo.location}</p>
-            </div>
-            <div className="border-t border-ink/20 py-5">
-              <p className="mono text-[0.68rem] uppercase tracking-[0.12em] text-ink/55">
-                onde começo
+              <p>
+                Hoje trabalho como <strong className="font-semibold text-ink">Desenvolvedor
+                Back-end Jr. na inChurch</strong>, entre integrações, produto e sistemas que já
+                têm bastante história.
               </p>
-              <p className="mt-2 font-semibold">Backend, integrações e sistemas em produção</p>
-            </div>
-            <div className="border-y border-ink/20 py-5">
-              <p className="mono text-[0.68rem] uppercase tracking-[0.12em] text-ink/55">
-                no momento
-              </p>
-              <p className="mt-2 font-semibold">Desenvolvedor Back-end Jr. · inChurch</p>
             </div>
           </div>
 
@@ -39,7 +32,7 @@ export function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.6 }}
-              className="display max-w-[14ch] text-5xl leading-[0.96] sm:text-7xl"
+              className="display max-w-[16ch] text-5xl leading-[0.98] sm:text-6xl"
             >
               Eu não planejei “ser full-stack”. Só nunca gostei de parar na metade do problema.
             </motion.h2>
@@ -85,8 +78,8 @@ export function About() {
         </div>
 
         <div className="mt-10 grid gap-5 md:grid-cols-[1fr_3fr] md:items-start">
-          <p className="mono text-[0.68rem] uppercase tracking-[0.12em] text-ink/50">
-            Formação contínua
+          <p className="text-xs font-semibold text-ink/50">
+            algumas coisas que estudei
           </p>
           <ul className="flex flex-wrap gap-x-7 gap-y-3">
             {certifications.map((certification) => (

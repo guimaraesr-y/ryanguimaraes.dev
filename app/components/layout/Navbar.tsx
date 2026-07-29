@@ -5,7 +5,11 @@ import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { navLinks, personalInfo } from "@/app/data/constants";
 
-export function Navbar() {
+interface NavbarProps {
+  contactEmail?: string;
+}
+
+export function Navbar({ contactEmail }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -34,8 +38,8 @@ export function Navbar() {
             <span className="handwritten block text-lg font-bold text-paper transition-colors group-hover:text-acid">
               ryan.guimarães
             </span>
-            <span className="mono mt-0.5 hidden text-[0.55rem] uppercase tracking-[0.12em] text-muted sm:block">
-              ~/meu-canto-na-web
+            <span className="mt-0.5 hidden text-[0.65rem] text-muted sm:block">
+              meu canto na web
             </span>
           </a>
 
@@ -44,7 +48,7 @@ export function Navbar() {
               <button
                 key={link.name}
                 onClick={() => scrollToSection(link.href)}
-                className="focus-ring mono text-[0.65rem] uppercase tracking-[0.1em] text-muted transition-colors hover:text-paper"
+                className="focus-ring text-xs font-semibold text-muted transition-colors hover:text-paper"
               >
                 {link.name}
               </button>
@@ -56,7 +60,7 @@ export function Navbar() {
               href={personalInfo.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="focus-ring mono text-[0.65rem] uppercase tracking-[0.1em] text-muted hover:text-paper"
+              className="focus-ring text-xs font-semibold text-muted hover:text-paper"
             >
               GitHub
             </a>
@@ -91,29 +95,37 @@ export function Navbar() {
           >
             <div className="flex h-full flex-col">
               <div className="border-t border-line">
-                {navLinks.map((link, index) => (
+                {navLinks.map((link) => (
                   <button
                     key={link.name}
                     onClick={() => scrollToSection(link.href)}
                     className="focus-ring display flex w-full items-center justify-between border-b border-line py-5 text-left text-4xl text-paper"
                   >
                     {link.name}
-                    <span className="mono text-[0.62rem] text-muted">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
+                    <span className="handwritten text-sm text-muted">vai ↘</span>
                   </button>
                 ))}
               </div>
               <div className="mt-auto flex items-end justify-between border-t border-line pt-5">
-                <p className="mono max-w-[14rem] text-[0.62rem] uppercase leading-5 tracking-[0.1em] text-muted">
+                <p className="max-w-[14rem] text-xs leading-5 text-muted">
                     Meu canto na web. Feito no Rio, mexido aos poucos e sempre em construção.
                 </p>
-                <a
-                  href={`mailto:${personalInfo.email}`}
-                  className="focus-ring bg-acid px-4 py-3 text-xs font-bold text-ink"
-                >
-                  E-mail
-                </a>
+                {contactEmail ? (
+                  <a
+                    href={`mailto:${contactEmail}`}
+                    className="focus-ring bg-acid px-4 py-3 text-xs font-bold text-ink"
+                  >
+                    E-mail
+                  </a>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => scrollToSection("#contact")}
+                    className="focus-ring bg-acid px-4 py-3 text-xs font-bold text-ink"
+                  >
+                    Contato
+                  </button>
+                )}
               </div>
             </div>
           </motion.div>
