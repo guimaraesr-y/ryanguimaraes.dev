@@ -68,8 +68,8 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/favicon.svg",
-    apple: "/favicon.svg",
+    icon: [{ url: "/favicon.svg?v=2", type: "image/svg+xml" }],
+    apple: "/favicon.svg?v=2",
   },
 };
 
@@ -83,7 +83,7 @@ export default function RootLayout({
       <head>
         <meta
           property="og:logo"
-          content="https://ryanguimaraes.dev/favicon.svg"
+          content="https://ryanguimaraes.dev/favicon.svg?v=2"
         />
       </head>
       <body className="antialiased">

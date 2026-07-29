@@ -1,10 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-  <defs>
-    <linearGradient id="fav" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#8B5CF6"/>
-      <stop offset="100%" style="stop-color:#06B6D4"/>
-    </linearGradient>
-  </defs>
-  <rect width="32" height="32" rx="6" fill="#0a0a0a"/>
-  <text x="16" y="22" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="url(#fav)" text-anchor="middle">R</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="15" fill="#111310"/>
+  <path
+    d="M10 41.5C19 33 25.5 25 34 12.5C40.5 17 48.5 19.5 54 20.5C44.5 31 37 42 30.5 55C23 51.5 16 47 10 41.5Z"
+    fill="#3157FF"
+  />
+  <path
+    d="M19 45V22H31.5C39 22 43.5 25.7 43.5 32C43.5 36.4 40.9 39.6 36.8 41L44.5 49H36.5L30 42H26V45H19ZM26 36H31C34.5 36 36.5 34.7 36.5 32.2C36.5 29.7 34.5 28.5 31 28.5H26V36Z"
+    fill="#F4F0E6"
+  />
+  <circle cx="48.5" cy="14.5" r="5.5" fill="#A8E06C"/>
+  <path d="M14 51.5C24.5 55 36 55.5 49.5 51" fill="none" stroke="#F16A4B" stroke-width="2.5" stroke-linecap="round"/>
 </svg>
