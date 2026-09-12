@@ -11,6 +11,14 @@ export interface Project {
   liveUrl?: string;
 }
 
+export interface Article {
+  id: string;
+  title: string;
+  description: string;
+  publishedAt: string;
+  url: string;
+}
+
 export interface Experience {
   id: string;
   company: string;

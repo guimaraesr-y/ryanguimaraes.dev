@@ -57,6 +57,7 @@ export const stats: Stat[] = [
 export const socialLinks: SocialLink[] = [
   { name: "GitHub", url: "https://github.com/guimaraesr-y", icon: "github" },
   { name: "LinkedIn", url: "https://www.linkedin.com/in/guimaraesry/", icon: "linkedin" },
+  { name: "Medium", url: "https://medium.com/@guimaraesry", icon: "medium" },
 ];
 
 export const personalInfo = {
@@ -67,6 +68,7 @@ export const personalInfo = {
   website: "https://ryanguimaraes.dev",
   github: "https://github.com/guimaraesr-y",
   linkedin: "https://www.linkedin.com/in/guimaraesry/",
+  medium: "https://medium.com/@guimaraesry",
   bio: `Desenvolvedor Full-Stack com forte domínio em Python, TypeScript, PHP e Java.
 Especialista em arquiteturas modernas como Django, Spring Boot e Laravel.
 Reconhecido pela comunicação clara e colaboração efetiva.
@@ -76,6 +78,7 @@ Versátil em ambientes Windows e Linux, comprometido com soluções escaláveis 
 export const navLinks = [
   { name: "Sobre", href: "#about" },
   { name: "Projetos", href: "#projects" },
+  { name: "Artigos", href: "#writing" },
   { name: "Experiência", href: "#experience" },
   { name: "Stack", href: "#skills" },
   { name: "Contato", href: "#contact" },

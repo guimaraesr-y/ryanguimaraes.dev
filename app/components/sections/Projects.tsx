@@ -138,7 +138,9 @@ export function Projects() {
                   key={project.id}
                   className="group grid gap-4 border-b border-line py-6 sm:grid-cols-[3rem_1fr_auto] sm:items-center"
                 >
-                  <span className="mono text-xs text-muted">{String(index + 4).padStart(2, "0")}</span>
+                  <span className="mono text-xs text-muted">
+                    {String(index + featuredProjects.length + 1).padStart(2, "0")}
+                  </span>
                   <div>
                     <h3 className="text-lg font-semibold text-paper transition-colors group-hover:text-acid">
                       {project.title}

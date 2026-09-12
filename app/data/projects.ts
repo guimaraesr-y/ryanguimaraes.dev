@@ -2,6 +2,18 @@ import type { Project } from "../types";
 
 export const projects: Project[] = [
   {
+    id: "artifact-studio",
+    title: "Artifact Studio",
+    description:
+      "Camada de publicação que transforma Markdown em páginas duráveis e permite que agentes de IA criem, encontrem e atualizem o mesmo link via MCP.",
+    technologies: ["Next.js", "Markdown", "MCP", "Agentes de IA"],
+    image: "/projects/artifact-studio.svg",
+    eyebrow: "Produto / AI publishing",
+    metric: "Markdown + MCP",
+    featured: true,
+    liveUrl: "https://md.ryanguimaraes.dev/",
+  },
+  {
     id: "mindyourevent",
     title: "MindYourEvent",
     description:

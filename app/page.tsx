@@ -3,6 +3,7 @@ import { Hero } from "@/app/components/sections/Hero";
 import { About } from "@/app/components/sections/About";
 import { Experience } from "@/app/components/sections/Experience";
 import { Projects } from "@/app/components/sections/Projects";
+import { Writing } from "@/app/components/sections/Writing";
 import { Skills } from "@/app/components/sections/Skills";
 import { Contact } from "@/app/components/sections/Contact";
 import { Footer } from "@/app/components/layout/Footer";
@@ -27,6 +28,7 @@ export default function Home() {
       sameAs: [
         "https://github.com/guimaraesr-y",
         "https://www.linkedin.com/in/guimaraesry/",
+        "https://medium.com/@guimaraesry",
       ],
       knowsAbout: [
         "Backend development",
@@ -53,6 +55,7 @@ export default function Home() {
       <Hero />
       <About />
       <Projects />
+      <Writing />
       <Experience />
       <Skills />
       <Contact contactEmail={contactEmail} />

@@ -1,0 +1,27 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="720" fill="#171A16"/>
+  <path d="M0 120H1200M0 240H1200M0 360H1200M0 480H1200M0 600H1200" stroke="#2E332B"/>
+  <path d="M120 0V720M240 0V720M360 0V720M480 0V720M600 0V720M720 0V720M840 0V720M960 0V720M1080 0V720" stroke="#2E332B"/>
+  <text x="72" y="92" fill="#A8E06C" font-family="monospace" font-size="18">ARTIFACT STUDIO / PUBLISHING FLOW</text>
+  <text x="72" y="154" fill="#F4F0E6" font-family="Arial, sans-serif" font-size="46" font-weight="700">Markdown in. A durable<tspan x="72" dy="54">page out.</tspan></text>
+  <rect x="72" y="310" width="462" height="300" rx="18" fill="#111310" stroke="#41463F"/>
+  <rect x="666" y="310" width="462" height="300" rx="18" fill="#F4F0E6"/>
+  <circle cx="108" cy="348" r="7" fill="#F16A4B"/>
+  <circle cx="134" cy="348" r="7" fill="#E9D55C"/>
+  <circle cx="160" cy="348" r="7" fill="#A8E06C"/>
+  <text x="108" y="398" fill="#A8E06C" font-family="monospace" font-size="16"># product-notes.md</text>
+  <text x="108" y="442" fill="#F4F0E6" font-family="Arial, sans-serif" font-size="27" font-weight="700">Artifact Studio</text>
+  <text x="108" y="482" fill="#9BA198" font-family="Arial, sans-serif" font-size="19">Publish a living page</text>
+  <rect x="108" y="520" width="228" height="14" rx="7" fill="#41463F"/>
+  <rect x="108" y="550" width="330" height="14" rx="7" fill="#41463F"/>
+  <rect x="702" y="348" width="66" height="28" rx="14" fill="#A8E06C"/>
+  <text x="719" y="367" fill="#111310" font-family="monospace" font-size="13" font-weight="700">LIVE</text>
+  <text x="702" y="432" fill="#111310" font-family="Arial, sans-serif" font-size="31" font-weight="700">Artifact Studio</text>
+  <text x="702" y="470" fill="#5C615A" font-family="Arial, sans-serif" font-size="18">One URL, kept current by AI agents.</text>
+  <rect x="702" y="516" width="192" height="36" rx="18" fill="#3157FF"/>
+  <text x="725" y="540" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="700">Connect via MCP</text>
+  <path d="M558 460H642" stroke="#A8E06C" stroke-width="4" stroke-linecap="round"/>
+  <path d="M624 442L642 460L624 478" stroke="#A8E06C" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="600" cy="460" r="32" fill="#3157FF"/>
+  <path d="M586 460H614M600 446V474" stroke="white" stroke-width="3" stroke-linecap="round"/>
+</svg>
