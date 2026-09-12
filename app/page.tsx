@@ -1,6 +1,7 @@
 import { Navbar } from "@/app/components/layout/Navbar";
 import { ScrollProgress } from "@/app/components/layout/ScrollProgress";
 import { Hero } from "@/app/components/sections/Hero";
+import { CommandToolkit } from "@/app/components/sections/CommandToolkit";
 import { About } from "@/app/components/sections/About";
 import { Experience } from "@/app/components/sections/Experience";
 import { Projects } from "@/app/components/sections/Projects";
@@ -55,6 +56,7 @@ export default function Home() {
       <ScrollProgress />
       <Navbar contactEmail={contactEmail} />
       <Hero />
+      <CommandToolkit />
       <About />
       <Projects />
       <Writing />
