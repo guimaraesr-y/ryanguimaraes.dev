@@ -1,4 +1,5 @@
 import { Navbar } from "@/app/components/layout/Navbar";
+import { ScrollProgress } from "@/app/components/layout/ScrollProgress";
 import { Hero } from "@/app/components/sections/Hero";
 import { About } from "@/app/components/sections/About";
 import { Experience } from "@/app/components/sections/Experience";
@@ -51,6 +52,7 @@ export default function Home() {
           __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
         }}
       />
+      <ScrollProgress />
       <Navbar contactEmail={contactEmail} />
       <Hero />
       <About />

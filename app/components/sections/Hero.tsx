@@ -22,6 +22,11 @@ export function Hero() {
   });
   const portraitY = useTransform(scrollYProgress, [0, 1], [0, 90]);
   const markerY = useTransform(scrollYProgress, [0, 1], [0, -70]);
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, -42]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.9], [1, 0.58]);
+  const portraitScale = useTransform(scrollYProgress, [0, 1], [1, 1.06]);
+  const noteY = useTransform(scrollYProgress, [0, 1], [0, -34]);
+  const labelY = useTransform(scrollYProgress, [0, 1], [0, 26]);
 
   return (
     <section
@@ -38,7 +43,13 @@ export function Hero() {
       </motion.div>
 
       <div className="section-shell relative z-10 grid min-h-[calc(100vh-7rem)] items-center gap-14 pb-14 lg:grid-cols-[1.08fr_0.92fr] lg:gap-20">
-        <div className="pt-6 lg:pt-0">
+        <motion.div
+          style={{
+            y: prefersReducedMotion ? 0 : contentY,
+            opacity: prefersReducedMotion ? 1 : contentOpacity,
+          }}
+          className="pt-6 lg:pt-0"
+        >
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
@@ -116,7 +127,7 @@ export function Hero() {
               </div>
             ))}
           </motion.dl>
-        </div>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, x: 30 }}
@@ -125,16 +136,19 @@ export function Hero() {
           className="relative mx-auto w-full max-w-lg pb-10 lg:mx-0"
         >
           <motion.div
-            style={{ y: prefersReducedMotion ? 0 : portraitY }}
-            className="rough-circle relative aspect-[4/5] overflow-hidden bg-[#242820]"
+            style={{
+              y: prefersReducedMotion ? 0 : portraitY,
+              scale: prefersReducedMotion ? 1 : portraitScale,
+            }}
+            className="rough-circle relative aspect-[4/5] overflow-hidden bg-[#242820] will-change-transform"
           >
             <Image
-              src="/pfp.png"
+              src="/ryan-forest.png"
               alt={`Retrato de ${personalInfo.name}`}
               fill
               priority
               sizes="(max-width: 1024px) 90vw, 42vw"
-              className="object-cover object-center grayscale-[12%] contrast-[1.04]"
+              className="object-cover object-[52%_center] grayscale-[12%] contrast-[1.04]"
             />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/75 via-transparent to-transparent" />
             <div className="absolute bottom-5 left-5 text-xs text-paper/70">
@@ -142,18 +156,24 @@ export function Hero() {
             </div>
           </motion.div>
 
-          <div className="paper-note absolute -bottom-1 -left-3 max-w-[15rem] -rotate-2 bg-coral p-5 text-ink sm:-left-8 sm:p-6">
+          <motion.div
+            style={{ y: prefersReducedMotion ? 0 : noteY }}
+            className="paper-note absolute -bottom-1 -left-3 max-w-[15rem] -rotate-2 bg-coral p-5 text-ink sm:-left-8 sm:p-6"
+          >
             <p className="handwritten text-base font-bold">
               hoje, na minha mesa:
             </p>
             <p className="mt-2 text-sm font-semibold leading-5 text-ink/80">
               Django, Rails, integrações e aquele bug que só aparece em produção.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="handwritten absolute -right-2 top-8 rotate-3 bg-acid px-4 py-2 text-sm font-bold text-ink sm:-right-10">
+          <motion.div
+            style={{ y: prefersReducedMotion ? 0 : labelY }}
+            className="handwritten absolute -right-2 top-8 rotate-3 bg-acid px-4 py-2 text-sm font-bold text-ink sm:-right-10"
+          >
             curioso por sistemas inteiros ↗
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

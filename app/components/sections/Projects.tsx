@@ -104,13 +104,23 @@ function ProjectFeature({ project, index }: { project: Project; index: number })
 }
 
 export function Projects() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const prefersReducedMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const headerY = useTransform(scrollYProgress, [0, 1], [24, -24]);
   const featuredProjects = projects.filter((project) => project.featured);
   const otherProjects = projects.filter((project) => !project.featured);
 
   return (
-    <section id="projects" className="relative py-24 lg:py-32">
+    <section ref={sectionRef} id="projects" className="relative py-24 lg:py-32">
       <div className="section-shell">
-        <div className="grid gap-8 pb-14 md:grid-cols-12 md:items-end">
+        <motion.div
+          style={{ y: prefersReducedMotion ? 0 : headerY }}
+          className="grid gap-8 pb-14 md:grid-cols-12 md:items-end"
+        >
           <div className="md:col-span-8">
             <p className="section-label">Projetos que valem uma conversa</p>
             <h2 className="display mt-4 max-w-[17ch] text-balance text-[2.5rem] leading-[0.98] text-paper sm:mt-5 sm:max-w-[15ch] sm:text-6xl sm:leading-[0.96]">
@@ -121,7 +131,7 @@ export function Projects() {
             Não são só vitrines: cada um guarda uma decisão difícil, um erro útil
             ou uma ideia que eu levaria para o próximo.
           </p>
-        </div>
+        </motion.div>
 
         {featuredProjects.map((project, index) => (
           <ProjectFeature key={project.id} project={project} index={index} />
