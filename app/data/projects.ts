@@ -14,6 +14,21 @@ export const projects: Project[] = [
     liveUrl: "https://md.ryanguimaraes.dev/",
   },
   {
+    id: "roccart",
+    title: "Cia RocCart",
+    description:
+      "Do público à portaria: plataforma para uma companhia de teatro com reservas por sessão, seleção de assentos e QR Code. Operou duas sessões do espetáculo Jardim do Inimigo, com os 224 lugares da primeira sessão esgotados e check-in individual no painel administrativo.",
+    technologies: ["Next.js", "TypeScript", "Prisma", "PostgreSQL"],
+    gallery: [
+      { src: "/projects/roccart/reservas-desktop.png", alt: "Reservas do espetáculo Jardim do Inimigo, com disponibilidade por sessão" },
+      { src: "/projects/roccart/painel-admin.png", alt: "Painel da Cia RocCart com ocupação, entradas e mapa de assentos" },
+      { src: "/projects/roccart/reservas-mobile.png", alt: "Página de reservas da Cia RocCart no celular" },
+    ],
+    eyebrow: "Projeto / Cultura e eventos",
+    metric: "2 sessões · 224 lugares esgotados na primeira",
+    featured: true,
+  },
+  {
     id: "mindyourevent",
     title: "MindYourEvent",
     description:

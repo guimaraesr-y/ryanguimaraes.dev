@@ -4,6 +4,7 @@ export interface Project {
   description: string;
   technologies: string[];
   image?: string;
+  gallery?: { src: string; alt: string }[];
   eyebrow?: string;
   metric?: string;
   featured?: boolean;

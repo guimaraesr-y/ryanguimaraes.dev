@@ -33,7 +33,20 @@ function ProjectFeature({ project, index }: { project: Project; index: number })
           style={{ y: prefersReducedMotion ? 0 : imageY }}
           className="project-image relative aspect-[3/2] overflow-hidden bg-background sm:aspect-[5/3]"
         >
-          {project.image ? (
+          {project.gallery ? (
+            <div className="grid h-full grid-cols-[1fr_0.38fr] gap-2 bg-[#061119] p-3 pt-12 sm:gap-3 sm:p-5 sm:pt-14">
+              <div className="grid min-h-0 grid-rows-2 gap-2 sm:gap-3">
+                {project.gallery.slice(0, 2).map((image) => (
+                  <div key={image.src} className="relative overflow-hidden rounded-sm border border-white/10 bg-black">
+                    <Image src={image.src} alt={image.alt} fill sizes="(max-width: 768px) 65vw, 40vw" className="object-contain" />
+                  </div>
+                ))}
+              </div>
+              <div className="relative overflow-hidden rounded-sm border border-white/10 bg-black">
+                <Image src={project.gallery[2].src} alt={project.gallery[2].alt} fill sizes="(max-width: 768px) 25vw, 16vw" className="object-contain" />
+              </div>
+            </div>
+          ) : project.image ? (
             <Image
               src={project.image}
               alt={`Visual conceitual do projeto ${project.title}`}
