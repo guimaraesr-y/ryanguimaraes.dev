@@ -7,7 +7,11 @@ export const projects: Project[] = [
     description:
       "Camada de publicação que transforma Markdown em páginas duráveis e permite que agentes de IA criem, encontrem e atualizem o mesmo link via MCP.",
     technologies: ["Next.js", "Markdown", "MCP", "Agentes de IA"],
-    image: "/projects/artifact-studio.svg",
+    image: "/projects/artifact-studio/capa.png",
+    screenshots: [
+      { src: "/projects/artifact-studio/pagina-inicial.png", alt: "Página inicial do Artifact Studio, com demonstração de Markdown e página publicada" },
+      { src: "/projects/artifact-studio/onboarding.png", alt: "Boas-vindas do Artifact Studio, com publicação, compartilhamento e conexão de agentes via MCP" },
+    ],
     eyebrow: "Produto / AI publishing",
     metric: "Markdown + MCP",
     featured: true,

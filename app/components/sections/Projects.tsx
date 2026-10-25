@@ -31,7 +31,7 @@ function ProjectFeature({ project, index }: { project: Project; index: number })
       >
         <motion.div
           style={{ y: prefersReducedMotion ? 0 : imageY }}
-          className="project-image relative aspect-[3/2] overflow-hidden bg-background sm:aspect-[5/3]"
+          className={`project-image relative overflow-hidden bg-background ${project.screenshots ? "aspect-video" : "aspect-[3/2] sm:aspect-[5/3]"}`}
         >
           {project.gallery ? (
             <div className="grid h-full grid-cols-[1fr_0.38fr] gap-2 bg-[#061119] p-3 pt-12 sm:gap-3 sm:p-5 sm:pt-14">
@@ -52,13 +52,28 @@ function ProjectFeature({ project, index }: { project: Project; index: number })
               alt={`Visual conceitual do projeto ${project.title}`}
               fill
               sizes="(max-width: 768px) 100vw, 58vw"
-              className="object-fill sm:object-contain"
+              className={project.screenshots ? "object-contain" : "object-fill sm:object-contain"}
             />
           ) : null}
           <div className="handwritten absolute left-4 top-4 -rotate-2 bg-paper px-3 py-2 text-sm font-bold text-ink">
             projeto 0{index + 1}
           </div>
         </motion.div>
+        {project.screenshots ? (
+          <div className="mt-3 grid grid-cols-2 gap-3 sm:mt-4 sm:gap-4">
+            {project.screenshots.map((screenshot) => (
+              <div key={screenshot.src} className="relative aspect-video overflow-hidden rounded-sm border border-line bg-[#f8f7f3]">
+                <Image
+                  src={screenshot.src}
+                  alt={screenshot.alt}
+                  fill
+                  sizes="(max-width: 768px) 46vw, 28vw"
+                  className="object-contain"
+                />
+              </div>
+            ))}
+          </div>
+        ) : null}
       </motion.div>
 
       <motion.div
