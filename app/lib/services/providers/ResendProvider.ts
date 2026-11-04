@@ -119,6 +119,28 @@ export class ResendProvider implements IContactServiceStrategy {
     return `Variáveis de ambiente ausentes: ${missingVariables.join(", ")}`;
   }
 
+  async sendToOwner(data: ContactData): Promise<ServiceResult> {
+    const configurationError = this.getConfigurationError();
+    if (configurationError) {
+      return { success: false, error: configurationError };
+    }
+
+    try {
+      const { error } = await this.resend.emails.send({
+        from: this.fromEmail,
+        to: this.ownerEmail,
+        replyTo: data.email,
+        subject: `Novo contato do portfólio: ${data.name.replace(/[\r\n]/g, " ")}`,
+        text: `Nome: ${data.name}\nEmail: ${data.email}\n\nMensagem:\n${data.message}`,
+        html: `<h1>Novo contato do portfólio</h1><p><strong>Nome:</strong> ${escapeHtml(data.name)}</p><p><strong>Email:</strong> ${escapeHtml(data.email)}</p><p><strong>Mensagem:</strong></p><div style="white-space: pre-wrap">${escapeHtml(data.message)}</div>`,
+      });
+
+      return error ? { success: false, error: error.message } : { success: true };
+    } catch (error) {
+      return { success: false, error: getErrorMessage(error) };
+    }
+  }
+
   async sendToVisitor(data: ContactData, visitorEmail: string): Promise<ServiceResult> {
     const configurationError = this.getConfigurationError();
     if (configurationError) {

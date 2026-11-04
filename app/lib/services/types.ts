@@ -11,5 +11,6 @@ export interface ServiceResult {
 }
 
 export interface IContactServiceStrategy {
+  sendToOwner(data: ContactData): Promise<ServiceResult>;
   sendToVisitor(data: ContactData, visitorEmail: string): Promise<ServiceResult>;
 }

@@ -41,7 +41,17 @@ export async function POST(request: NextRequest) {
     const provider = new ResendProvider();
     const contactService = new ContactService(provider);
     
-    const visitorResult = await contactService.sendToVisitor({ name, email, message, ip }, email);
+    const contact = { name, email, message, ip };
+    const ownerResult = await contactService.sendToOwner(contact);
+    if (!ownerResult.success) {
+      console.error("Owner email failed:", ownerResult.error);
+      return NextResponse.json(
+        { success: false, error: "Não foi possível enviar sua mensagem. Tente novamente." },
+        { status: 502 }
+      );
+    }
+
+    const visitorResult = await contactService.sendToVisitor(contact, email);
     if (!visitorResult.success) {
       console.error("Visitor email failed:", visitorResult.error);
     }
