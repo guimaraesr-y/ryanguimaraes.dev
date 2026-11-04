@@ -68,8 +68,8 @@ export async function createSocialImage() {
           <img
             src={portraitSrc}
             alt="Retrato de Ryan Guimarães"
-            width="530"
-            height="530"
+            width={530}
+            height={530}
             style={{ objectFit: "contain" }}
           />
         </div>
